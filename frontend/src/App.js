@@ -1,11 +1,16 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Views/Home'
+import ThemeProvider from 'react-bootstrap/ThemeProvider'
+
 function App(){
   return (
-    <>
-    <Home/>
-    </>
+//     <ThemeProvider
+//   breakpoints={['xl', 'lg', 'md', 'sm']}
+//   minBreakpoint="sm"
+// >
+      <Home/>
+    // </ThemeProvider>
   );
 }
 

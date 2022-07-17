@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import tpg_logo from '../assets/tpg_logo-1-svg.svg'
 import tgl_logo from '../assets/TGLAB_logo.svg'
 import SearchBar from './SearchBar'
 
@@ -23,14 +22,13 @@ function Banner() {
         style={{
             backgroundColor: 'rgba(0, 0, 0, 0.4)',
         }}>
-        <div className='d-flex p-4 justify-content-center align-items-center h-80'>
-            <div className='text-white'>
-                <img src={tgl_logo}/>
-                <h1 className='mb-3'>
+        <div className='d-flex p-4 justify-content-center flex-column align-items-center'
+         >
+                <img className="img-fluid min-width" src={tgl_logo}/>
+                <h1 className='mb-3 text-white'>
                     Movie Search Engine
                 </h1>
              <SearchBar/>
-            </div>
         </div>
     </div>
 </div>
