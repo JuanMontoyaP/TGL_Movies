@@ -5,6 +5,7 @@ class Server {
     constructor() {
         this.app = express()
         this.usuariosPath = '/users'
+        this.moviesPath = '/movies'
 
         //Middlewares
         this.middlewares()
@@ -20,6 +21,7 @@ class Server {
     routes() {
 
         this.app.use(this.usuariosPath, require('../routes/users'))
+        this.app.use(this.moviesPath, require('../routes/movies'))
     }
 
     listen() {
