@@ -1,16 +1,16 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './Views/Home'
-import ThemeProvider from 'react-bootstrap/ThemeProvider'
-
+import {BrowserRouter as Router} from 'react-router-dom'
+import AllRoutes from './config/AllRoutes'
+import {UserContextProvider} from './context/UserContext'
 function App(){
   return (
-//     <ThemeProvider
-//   breakpoints={['xl', 'lg', 'md', 'sm']}
-//   minBreakpoint="sm"
-// >
-      <Home/>
-    // </ThemeProvider>
+  <UserContextProvider>
+<Router> 
+<AllRoutes/>
+</Router>
+   </UserContextProvider>
+
   );
 }
 
