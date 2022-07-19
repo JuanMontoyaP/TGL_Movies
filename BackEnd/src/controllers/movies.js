@@ -8,6 +8,7 @@ const access_api = `?api_key=${process.env.API_KEY}`;
 
 const getMovies = async (req, res) => {
   api_url = `${base_url}movie/popular${access_api}`;
+
   try {
     const response = await axios.get(api_url);
 
@@ -24,6 +25,23 @@ const getMovies = async (req, res) => {
   }
 };
 
+const getMovieDetail = async (req, res) => {
+  movie_id = req.params.id;
+  api_url = `${base_url}movie/${movie_id}${access_api}  `;
+
+  try {
+    const response = await axios.get(api_url);
+    const movie = await getMovieData(response.data);
+
+    res.status(200).json(movie);
+  } catch (error) {
+    res.status(404).json({
+      msg: "No movie found",
+    });
+  }
+};
+
 module.exports = {
   getMovies,
+  getMovieDetail,
 };
