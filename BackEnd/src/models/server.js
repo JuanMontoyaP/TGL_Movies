@@ -1,10 +1,14 @@
 const express = require("express");
+const { dbConnection } = require("../database/config");
 
 class Server {
   constructor() {
     this.app = express();
     this.usuariosPath = "/users";
     this.moviesPath = "/movies";
+
+    //Connect to DB
+    this.connectDB();
 
     //Middlewares
     this.middlewares();
@@ -13,7 +17,12 @@ class Server {
     this.routes();
   }
 
+  async connectDB() {
+    await dbConnection();
+  }
+
   middlewares() {
+    //Lectura y parseo del body
     this.app.use(express.json());
   }
 
