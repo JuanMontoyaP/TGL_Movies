@@ -13,7 +13,9 @@ class Server {
     this.routes();
   }
 
-  middlewares() {}
+  middlewares() {
+    this.app.use(express.json());
+  }
 
   routes() {
     this.app.use(this.usuariosPath, require("../routes/users"));
