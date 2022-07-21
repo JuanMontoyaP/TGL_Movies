@@ -1,11 +1,11 @@
 import React from 'react'
 import Login from '../Components/Login'
-function UserSignup() {
+function UserLogin() {
   return (
-    <>
+    <div className="d-flex justify-content-center">
     <Login/>
-    </>
+    </div>
   )
 }
 
-export default UserSignup
+export default UserLogin

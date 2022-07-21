@@ -2,7 +2,7 @@ import React from 'react'
 import UserSignup from '../Views/UserSignup'
 import UserLogin from '../Views/UserLogin'
 import PrivateRoute from '../Components/PrivateRoute'
-import UpdateProfile from '../Views/UpdateProfile'
+import UserProfileUpdate from '../Views/UserProfileUpdate'
 import PageNotFound from '../Views/PageNotFound'
 import GuestRoute from '../Components/GuestRoute'
 import Home from '../Views/Home'
@@ -31,7 +31,7 @@ function AllRoutes(){
   }/>
         <Route path="/update-profile" element={
           // <PrivateRoute>
-            <UpdateProfile/>
+            <UserProfileUpdate/>
           // </PrivateRoute>
         }/>
     <Route path="/*" element={<PageNotFound/>}/>

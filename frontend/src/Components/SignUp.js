@@ -2,6 +2,8 @@ import React, {useRef, useState} from 'react'
 import {Card, Button, Form, Alert} from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import {useUserContext} from '../context/UserContext'
+
+
 function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -32,7 +34,7 @@ async function handleSubmit(e){
 }
   return (
     <>
-    <Card>
+    <Card className="w-50">
         <Card.Body>
             <h2 className="text-center mb-4">Sign Up</h2>
             {error && <Alert variant="danger">{error}</Alert>}
@@ -56,10 +58,10 @@ async function handleSubmit(e){
                 <Button className="w-100" type="Submit" disable={loading}>Sign Up</Button>
             </Form>
         </Card.Body>
-    </Card>
     <div className="w-100 text-center mt-2">
         Already have an account? <Link to="/login">Log In</Link>
     </div>
+    </Card>
     </>
   )
 }
