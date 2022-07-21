@@ -16,8 +16,8 @@ const NavBar = () => {
           <Nav.Link style={{ color: 'white'}} href="#"><TbMovie/></Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Link style={{ color: 'white',}} href="#deets">SignUp</Nav.Link>
-          <Nav.Link style={{ color: 'white',}} eventKey={2} href="#memes">
+          <Nav.Link style={{ color: 'white',}} href="#SignUP">SignUp</Nav.Link>
+          <Nav.Link style={{ color: 'white',}} eventKey={2} href="#LogIn">
             LogIn
           </Nav.Link>
         </Nav>
