@@ -1,6 +1,8 @@
 require("dotenv").config();
 const axios = require("axios");
+const boom = require("@hapi/boom");
 
+const { successResponse, errorResponse } = require("../utils/responses");
 const { getMovieData } = require("../services/movies");
 
 const base_url = "https://api.themoviedb.org/3/";
@@ -12,16 +14,18 @@ const getMovies = async (req, res) => {
   try {
     const response = await axios.get(api_url);
 
+    if (!response.data.results) {
+      throw boom.internal("Error");
+    }
+
     const movies = [];
     for (let movie of response.data.results) {
       movies.push(await getMovieData(movie));
     }
 
-    res.status(200).json(movies);
+    successResponse(req, res, movies);
   } catch (error) {
-    res.status(500).json({
-      msg: "Internal Server Error",
-    });
+    errorResponse(req, res, error);
   }
 };
 
@@ -31,13 +35,16 @@ const getMovieDetail = async (req, res) => {
 
   try {
     const response = await axios.get(api_url);
+
+    if (!response.data) {
+      throw boom.notFound("No movie found");
+    }
+
     const movie = await getMovieData(response.data);
 
-    res.status(200).json(movie);
+    successResponse(req, res, movie);
   } catch (error) {
-    res.status(404).json({
-      msg: "No movie found",
-    });
+    errorResponse(req, res, error);
   }
 };
 
