@@ -11,7 +11,7 @@ function Banner() {
   return (
 
     <div
-    className='p-5 text-center bg-image'
+    className='p-5 text-center bg-image mt-5'
     style={{
         backgroundImage:
             "url('https://edu.teaminternational.com/wp-content/uploads/2020/10/tpl_hero.jpg')",
