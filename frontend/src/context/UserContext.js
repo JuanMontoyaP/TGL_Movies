@@ -8,7 +8,7 @@ export function useUserContext(){
 export function UserContextProvider({children}) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
-
+    const [homePage, setHomePage] = useState(false)
     function signup(username, email, password){
        return console.log(`Sign Up sucessfully! User: ${username}, email: ${email}`)
     }
@@ -31,7 +31,8 @@ export function UserContextProvider({children}) {
         login,
         logout,
         signup,
-        updateUser
+        updateUser,
+        setHomePage
     }
   return (
     <UserContext.Provider value={value}>

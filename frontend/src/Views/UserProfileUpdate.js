@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react'
 import {Card, Button, Form, Alert} from 'react-bootstrap'
 // import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
+
 function UpdateProfile() {
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -37,8 +38,8 @@ function handleSubmit(e){
     })
 }
   return (
-    <>
-    <Card>
+    <div className="d-flex justify-content-center">
+    <Card className="w-50">
         <Card.Body>
             <h2 className="text-center mb-4">Update Profile</h2>
             {error && <Alert variant="danger">{error}</Alert>}
@@ -58,11 +59,11 @@ function handleSubmit(e){
                 <Button className="w-100" type="Submit" disable={loading}>Update</Button>
             </Form>
         </Card.Body>
-    </Card>
     <div className="w-100 text-center mt-2">
      <Link to="/">Cancel</Link>
     </div>
-    </>
+    </Card>
+    </div>
   )
 }
 

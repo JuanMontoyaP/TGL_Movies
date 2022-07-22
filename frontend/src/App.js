@@ -1,16 +1,9 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router} from 'react-router-dom'
-import AllRoutes from './config/AllRoutes'
-import {UserContextProvider} from './context/UserContext'
+import Index from './layout/index'
 function App(){
   return (
-  <UserContextProvider>
-<Router> 
-<AllRoutes/>
-</Router>
-   </UserContextProvider>
-
+  <Index/>
   );
 }
 
