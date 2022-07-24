@@ -13,21 +13,29 @@ function EachCard(props) {
         setMouseOver(false)
         console.log("mouseOut", mouseOver)
     }
-
+const backOfCard = `<Card.body>
+<Card.title>Title: 
+  {props.title}
+  </Card.title>
+<Card.text>
+Year: 
+{props.date}
+Description:  {props.description}
+</Card.text>
+</Card.body>`
 
   return (
     <>
     <Card 
-    className='m-2 p-2 img-responsive img-thumbnail m-2' 
-    style={{ maxWidth: '200'}}
+    className='m-2 p-2' 
+    style={{ maxWidth: '250', width: '150px'}}
     onMouseOver={handleMouseOver}
     onMouseOut={handleMouseOut}
     > 
     {!mouseOver ? 
-    <Card.Img src="https://ww3.cuevana.pro/resize/200/storage/33380/92D77KV0QPr10oVaKV3ncZuNCOYYXJYzhALfmIW2.jpg"/>
+    <Card.Img src={props.poster}/>
     : 
-    <Card.Img src="	https://ww3.cuevana.pro/resize/200/storage/39175/dblmzk8OhtD5xHJy9HD82Vkj5KnKA50SMtJAxApl.jpg"/>
-
+    backOfCard
 }
     </Card>
     </>
