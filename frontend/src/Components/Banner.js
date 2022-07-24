@@ -1,17 +1,20 @@
 import React, { useRef } from 'react'
 import tgl_logo from '../assets/TGLAB_logo.svg'
 import SearchBar from './SearchBar'
+import {useUserContext} from '../context/UserContext'
 
-function Banner() {
+
+function Banner(props) {
     const searchInput = useRef()
-
+    const {homePage} = useUserContext()
+console.log("el homepage", homePage)
     function handleInput() {
         console.log(searchInput.current.value)
     }
   return (
 
     <div
-    className='p-5 text-center bg-image mt-5'
+    className='p-5 text-center bg-image mb-5'
     style={{
         backgroundImage:
             "url('https://edu.teaminternational.com/wp-content/uploads/2020/10/tpl_hero.jpg')",
@@ -28,7 +31,7 @@ function Banner() {
                 <h1 className='mb-3 text-white'>
                     Movie Search Engine
                 </h1>
-             <SearchBar/>
+             {homePage && <SearchBar/>}
         </div>
     </div>
 </div>

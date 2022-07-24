@@ -2,30 +2,22 @@ import React, {useEffect} from 'react'
 import { Container } from 'react-bootstrap'
 import Banner from '../Components/Banner'
 import MovieCards from '../Components/MovieCards'
-
-import NavBar from '../Components/NavBar'
-import Footer from '../Components/Footer'
+import {useUserContext} from '../context/UserContext'
 
 function Home() {
- 
+  const {homePage, setHomePage} = useUserContext()
 
-  
+  useEffect(()=>{
+    setHomePage(true)
+    console.log("home en effect", homePage)
+    
+    return ()=>setHomePage(false)
+  }, [])
+
   return (
-    <Container fluid style={{
-      background: 'linear-gradient(90deg, rgba(19,35,50,1) 0%, rgba(25,41,57,1) 35%, rgba(35,53,70,1) 100%)'}}>
+  <Container>
 
-    
-    <NavBar />
-    
-
-
-    <Banner/>
     <MovieCards/>
-
-<div>
-  <Footer/>
-    
-</div>
 
 
   </Container>
