@@ -14,7 +14,7 @@ console.log("el homepage", homePage)
   return (
 
     <div
-    className='p-5 text-center bg-image mb-5'
+    className='p-5 text-center bg-image mb-5 mt-5'
     style={{
         backgroundImage:
             "url('https://edu.teaminternational.com/wp-content/uploads/2020/10/tpl_hero.jpg')",
@@ -23,7 +23,7 @@ console.log("el homepage", homePage)
     <div
         className='mask'
         style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+            backgroundColor: 'rgba(0, 0, 0, 0.4)', 
         }}>
         <div className='d-flex p-4 justify-content-center flex-column align-items-center'
          >
@@ -31,7 +31,7 @@ console.log("el homepage", homePage)
                 <h1 className='mb-3 text-white'>
                     Movie Search Engine
                 </h1>
-             {homePage && <SearchBar/>}
+             {!homePage && <SearchBar/>}
         </div>
     </div>
 </div>
