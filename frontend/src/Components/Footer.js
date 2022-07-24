@@ -32,3 +32,5 @@ export const Footer = () => {
     </CDBFooter>
   );
 };
+
+export default Footer;
