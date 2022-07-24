@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 import Banner from '../Components/Banner'
 import MovieCards from '../Components/MovieCards'
 import NavBar from '../Components/NavBar'
-
+import { Footer } from '../Components/Footer'
 
 function Home() {
   return (
@@ -18,7 +18,8 @@ function Home() {
     <Banner/>
     <MovieCards/>
 <div>
-    Footer
+  <Footer/>
+    
 </div>
 
   </Container>

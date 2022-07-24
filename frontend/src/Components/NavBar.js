@@ -12,7 +12,7 @@ const NavBar = () => {
       <Navbar.Brand  className="text-light" href="#home">Movie Search Engine</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        //<Nav className="me-auto">
+        <Nav className="me-auto">
           <Nav.Link  href="#"><TbMovie style={{ color: 'white', fontSize: "25px"}}/></Nav.Link>
         </Nav>
         <Nav style={{justifyContent:"flex-end"}}>
