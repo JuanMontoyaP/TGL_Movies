@@ -8,7 +8,7 @@ import Banner from '../Components/Banner'
 function index() {
  
   return (
-    <Container style={{ background: 'linear-gradient(90deg, rgba(19,35,50,1) 0%, rgba(25,41,57,1) 35%, rgba(35,53,70,1) 100%)', height: '100%'}}>  
+    <Container fluid style={{ background: 'linear-gradient(90deg, rgba(19,35,50,1) 0%, rgba(25,41,57,1) 35%, rgba(35,53,70,1) 100%)', height: '100%'}}>  
       <UserContextProvider>
          <Banner /> 
 <Router> 
