@@ -29,7 +29,7 @@ async function handleSubmit(e){
 }
   return (
     <>
-    <Card className="w-50">
+    <Card className="w-50 mb-5" >
         <Card.Body >
             <h2 className="text-center mb-4">Log In</h2>
             {error && <Alert variant="danger">{error}</Alert>}
