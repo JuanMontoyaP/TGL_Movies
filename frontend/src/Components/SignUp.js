@@ -8,11 +8,12 @@ function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const usernameRef = useRef()
+    const nameRef = useRef()
     const {signup} = useUserContext()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+
 async function handleSubmit(e){
     e.preventDefault()
     if(passwordConfirmRef.current.value !== passwordRef.current.value){
@@ -21,7 +22,7 @@ async function handleSubmit(e){
     try {
         setError('')
         setLoading(true)
-        await signup(emailRef.current.value, passwordRef.current.value)
+        await signup(nameRef.current.value, emailRef.current.value, passwordRef.current.value)
         console.log('signup successful')
         alert("Signup successful")
 
@@ -39,9 +40,9 @@ async function handleSubmit(e){
             <h2 className="text-center mb-4">Sign Up</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
-            <Form.Group id="username">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" ref={usernameRef} />
+            <Form.Group id="name">
+                    <Form.Label>name</Form.Label>
+                    <Form.Control type="text" ref={nameRef} />
                 </Form.Group>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
@@ -55,6 +56,7 @@ async function handleSubmit(e){
                     <Form.Label>Password Confirmation</Form.Label>
                     <Form.Control type="password" ref={passwordConfirmRef} required />
                 </Form.Group>
+                
                 <Button className="w-100" type="Submit" disable={loading}>Sign Up</Button>
             </Form>
         </Card.Body>
