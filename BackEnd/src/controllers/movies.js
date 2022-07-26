@@ -53,8 +53,20 @@ const searchMovie = async (req, res) => {
   }
 };
 
+const getGenres = async (req, res) => {
+  api_url = `${base_url}genre/movie/list${access_api}`;
+
+  try {
+    const response = await getApiData(api_url);
+    successResponse(req, res, response.data);
+  } catch (error) {
+    errorResponse(req, res, error);
+  }
+};
+
 module.exports = {
   getMovies,
   getMovieDetail,
   searchMovie,
+  getGenres,
 };

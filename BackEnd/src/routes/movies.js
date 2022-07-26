@@ -5,6 +5,7 @@ const {
   getMovies,
   getMovieDetail,
   searchMovie,
+  getGenres,
 } = require("../controllers/movies");
 
 const {
@@ -23,5 +24,7 @@ router.get(
 );
 
 router.get("/", validateData(searchMovieSchema, "query"), searchMovie);
+
+router.get("/genre", getGenres);
 
 module.exports = router;
