@@ -1,5 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+import reducer, {ACTIONS, initialState} from '../Components/formsReducer'
+
 
 const UserContext = React.createContext()
 
@@ -10,7 +12,14 @@ export function UserContextProvider({children}) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
     const [homePage, setHomePage] = useState(false)
-   
+    const [error, setError] = useState('')
+
+
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const passwordConfirmRef = useRef()
+    const nameRef = useRef()
+
     async function signup(nameBody, emailBody, passwordBody){
         await axios.post('http://localhost:8080/users', {name: nameBody, email: emailBody, password: passwordBody, role: 'USER_ROLE'})
         .then(function (response) {
@@ -41,7 +50,16 @@ export function UserContextProvider({children}) {
         logout,
         signup,
         updateUser,
-        setHomePage
+        setHomePage,
+        emailRef,
+        passwordRef,
+        passwordConfirmRef,
+        nameRef, 
+        ACTIONS, 
+        reducer, 
+        initialState,
+        error,
+        setError
     }
   return (
     <UserContext.Provider value={value}>
