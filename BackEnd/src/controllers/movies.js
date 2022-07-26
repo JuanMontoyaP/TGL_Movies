@@ -58,7 +58,7 @@ const getGenres = async (req, res) => {
 
   try {
     const response = await getApiData(api_url);
-    successResponse(req, res, response.data);
+    successResponse(req, res, response.data.genres);
   } catch (error) {
     errorResponse(req, res, error);
   }
