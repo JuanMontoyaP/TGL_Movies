@@ -1,8 +1,16 @@
 const { Router } = require("express");
 
 const { validateData } = require("../middlewares/validateData");
-const { getMovies, getMovieDetail } = require("../controllers/movies");
-const { productDetailSchema } = require("../utils/schemas/movie");
+const {
+  getMovies,
+  getMovieDetail,
+  searchMovie,
+} = require("../controllers/movies");
+
+const {
+  movieDetailSchema,
+  searchMovieSchema,
+} = require("../utils/schemas/movie");
 
 const router = Router();
 
@@ -10,8 +18,10 @@ router.get("/popular", getMovies);
 
 router.get(
   "/detail/:id",
-  validateData(productDetailSchema, "params"),
+  validateData(movieDetailSchema, "params"),
   getMovieDetail
 );
+
+router.get("/", validateData(searchMovieSchema, "query"), searchMovie);
 
 module.exports = router;

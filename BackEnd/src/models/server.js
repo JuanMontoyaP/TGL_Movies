@@ -9,7 +9,7 @@ class Server {
         this.authPath = "/auth";        
 
         //Connect to DB
-        this.connectDB();
+        // this.connectDB();
 
         //Middlewares
         this.middlewares()
@@ -18,9 +18,9 @@ class Server {
         this.routes()
     }
 
-    async connectDB() {
-        await dbConnection();
-    }
+    // async connectDB() {
+    //     await dbConnection();
+    // }
 
     middlewares() {
         
@@ -30,9 +30,9 @@ class Server {
 
     routes() {
 
-        this.app.use(this.authPath, require("../routes/auth"));
+        // this.app.use(this.authPath, require("../routes/auth"));
         this.app.use(this.moviesPath, require("../routes/movies"));
-        this.app.use(this.usersPath, require('../routes/users'))
+        // this.app.use(this.usersPath, require('../routes/users'))
     }
 
     listen() {
