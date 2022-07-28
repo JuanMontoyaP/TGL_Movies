@@ -20,7 +20,7 @@ function MovieCards() {
     <Container className="d-flex flex-row flex-wrap mt-2 container-md justify-content-around">
 
     {moviesArray && moviesArray.map((movie, i)=>{
-        return <EachCard key={i} poster={movie.image} title={movie.title} date={movie.date} description={movie.description} />
+        return <EachCard key={i} movieId={movie.id}/>
     })}
     {(moviesArray.length == 0) && <p className="text-white">Sorry! We couldn't find any movies named "{searchMovie}"</p>}
 
