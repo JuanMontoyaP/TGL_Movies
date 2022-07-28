@@ -1,47 +1,25 @@
-import React, {useRef, useState} from 'react'
-import {Card, Button, Form, Alert} from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { Form } from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
 
-
+//Children of UserSignup on views
 function Signup() {
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const passwordConfirmRef = useRef()
-    const nameRef = useRef()
-    const {signup} = useUserContext()
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
+    const {emailRef, passwordRef, passwordConfirmRef, nameRef, error, setError} = useUserContext()
 
-async function handleSubmit(e){
-    e.preventDefault()
-    if(passwordConfirmRef.current.value !== passwordRef.current.value){
-        return setError('Passwords do not match')
+    function handleOnChange(e){
+        if (e.target.value.length < 6){
+            setError('Password must be at least 6 characters')
+            console.log("pass", passwordRef.current.value)
+        } else {
+            setError('')
+        }
     }
-    try {
-        setError('')
-        setLoading(true)
-        await signup(nameRef.current.value, emailRef.current.value, passwordRef.current.value)
-        console.log('signup successful')
-        alert("Signup successful")
+     
 
-        navigate('/login')
-    }
-    catch{
-        setError('Failed to create an account')
-    }
-    setLoading(false)
-}
   return (
     <>
-    <Card className="w-50 mb-5">
-        <Card.Body>
-            <h2 className="text-center mb-4">Sign Up</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
             <Form.Group id="name">
-                    <Form.Label>name</Form.Label>
+                    <Form.Label>Username</Form.Label>
                     <Form.Control type="text" ref={nameRef} />
                 </Form.Group>
                 <Form.Group id="email">
@@ -50,21 +28,14 @@ async function handleSubmit(e){
                 </Form.Group>
                 <Form.Group id="password">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" ref={passwordRef} required />
+                    <Form.Control type="password" ref={passwordRef} onChange={(e)=>handleOnChange(e)} required />
+                    {/* {error && <span>{error}</span>} */}
                 </Form.Group>
                 <Form.Group className="mb-3" id="password-confirm">
                     <Form.Label>Password Confirmation</Form.Label>
-                    <Form.Control type="password" ref={passwordConfirmRef} required />
+                    <Form.Control type="password" onChange={(e)=>handleOnChange(e)} ref={passwordConfirmRef} required />
                 </Form.Group>
-                
-                <Button className="w-100" type="Submit" disable={loading}>Sign Up</Button>
-            </Form>
-        </Card.Body>
-    <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
-    </div>
-    </Card>
-    </>
+                </>
   )
 }
 

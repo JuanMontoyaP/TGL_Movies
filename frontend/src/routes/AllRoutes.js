@@ -1,10 +1,10 @@
 import React from 'react'
 import UserSignup from '../Views/UserSignup'
 import UserLogin from '../Views/UserLogin'
-import PrivateRoute from '../Components/PrivateRoute'
+import PrivateRoute from './PrivateRoute'
 import UserProfileUpdate from '../Views/UserProfileUpdate'
 import PageNotFound from '../Views/PageNotFound'
-import GuestRoute from '../Components/GuestRoute'
+import GuestRoute from './GuestRoute'
 import Home from '../Views/Home'
 
 import { Routes, Route } from 'react-router-dom'
@@ -19,9 +19,9 @@ function AllRoutes(){
         <Home/>}/>
     <Route path="/signup" 
     element={
-    //<GuestRoute>
+    // <GuestRoute>
       <UserSignup/>
-    //</GuestRoute>
+    // </GuestRoute>
     }/>
     <Route path="/login" 
     element={
@@ -32,7 +32,7 @@ function AllRoutes(){
         <Route path="/update-profile" element={
           // <PrivateRoute>
             <UserProfileUpdate/>
-          // </PrivateRoute>
+         // </PrivateRoute>
         }/>
     <Route path="/*" element={<PageNotFound/>}/>
     </Routes>

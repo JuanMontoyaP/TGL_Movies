@@ -1,57 +1,32 @@
-import React, {useRef, useState} from 'react'
-import {Card, Button, Form, Alert} from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
+import React from 'react'
+import {Form, Button} from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
 
+//Children of UserLogin on views
 function Login() {
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const { login } = useUserContext
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
 
-async function handleSubmit(e){
-    e.preventDefault()
-    try {
-        setError('')
-        setLoading(true)
-        await login(emailRef.current.value, passwordRef.current.value)
-        console.log("login successful")
-        alert("Login successful")
-        navigate('/profile')
-    }
-    catch(error){
-        setError('Failed to log in')
-        console.log(error)
-    }
-    setLoading(false)
-}
+    const { emailRef, passwordRef, setError } = useUserContext()
+
+    function handleOnChange(e){
+      if (e.target.value.length < 6){
+          setError('Password must be at least 6 characters')
+          console.log("pass", passwordRef.current.value)
+      } else {
+          setError('')
+      }
+  }
+
   return (
     <>
-    <Card className="w-50 mb-5" >
-        <Card.Body >
-            <h2 className="text-center mb-4">Log In</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
                 <Form.Group className="mb-3" id="password">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" ref={passwordRef} required />
+                    <Form.Control type="password" ref={passwordRef} onChange={(e)=> handleOnChange(e)} required />
                 </Form.Group>
-                <Button className="w-100" type="Submit" disable={loading}>Log In</Button>
-            </Form>
-            <div className="w-100 text-center mt-3">
-       <Link to="/forgot-password"> Forgot password? </Link>
-    </div>
-        </Card.Body>
-    <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup"> Sign Up</Link>
-    </div>
-    </Card>
+                <Button> Log In with Google </Button>
     </>
   )
 }
