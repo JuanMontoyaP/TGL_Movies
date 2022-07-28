@@ -5,12 +5,13 @@ import {useMovieContext} from '../context/MoviesContext'
 
 //Children of Home on Views
 function MovieCards() {
-  const {moviesArray, popularMoviesFunction, searchMovie} = useMovieContext()
+  const {moviesArray, popularMoviesFunction, searchMovie, movieGenresFunction} = useMovieContext()
 
 
 //Executes the function with the API call on movie context
       useEffect(()=>{
         popularMoviesFunction()
+        movieGenresFunction()
       }, [])
 
 

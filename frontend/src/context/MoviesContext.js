@@ -15,16 +15,16 @@ export function useMovieContext() {
 }
 
 //Context function
-export function MovieContextProvider({
-	children,
-}) {
+export function MovieContextProvider({children}) {
+
 	//Set in SearchBar component via handleInput function
-	const [searchMovie, setSearchMovie] =
-		useState('');
+	const [searchMovie, setSearchMovie] = useState('');
 	//State used to map in MoviesCards and show eachMovieCard
-	const [moviesArray, setMoviesArray] = useState(
-		[]
-	);
+	const [moviesArray, setMoviesArray] = useState([]);
+    //State used to get array of all genres 
+    const [movieGenres, setMovieGenres] = useState([]);
+    //State used to save genre selected
+    const [genreSelected, setGenreSelected] = useState('')
 
 	//API call to show popular movies
 	async function popularMoviesFunction() {
@@ -33,6 +33,17 @@ export function MovieContextProvider({
 			.then((response) => {
 				console.log('response', response);
 				setMoviesArray(response.data.data);
+			})
+			.catch((error) => console.log(error));
+	}
+
+    //API call to get all genres names 
+    async function movieGenresFunction() {
+		await axios
+			.get('http://localhost:8080/movies/genre')
+			.then((response) => {
+				console.log('response of genre', response);
+				setMovieGenres(response.data.data);
 			})
 			.catch((error) => console.log(error));
 	}
@@ -73,6 +84,10 @@ export function MovieContextProvider({
 		searchFunction,
 		moviesArray,
 		popularMoviesFunction,
+        movieGenresFunction,
+        movieGenres,
+        genreSelected, 
+        setGenreSelected
 	};
 	return (
 		<MovieContext.Provider value={value}>
