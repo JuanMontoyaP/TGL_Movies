@@ -27,7 +27,7 @@ const login = async (req, res) => {
             })
         }
 
-        const token = await generateJWT(user.id)
+        const token = await generateJWT(user.id,  user.name, user.email)
         
         res.json({
             user,

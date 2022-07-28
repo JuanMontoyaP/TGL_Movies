@@ -1,52 +1,27 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import React, {useEffect} from 'react'
 import {Container} from 'react-bootstrap'
 import EachCard from './EachCard'
+import {useMovieContext} from '../context/MoviesContext'
+
+//Children of Home on Views
 function MovieCards() {
-const [moviesArray, setMoviesArray] = useState([])
+  const {moviesArray, popularMoviesFunction, searchMovie} = useMovieContext()
 
-    // const arrayDePeliculas = [
-    //     {poster: URL,
-    //     titulo: "string",
-    //     año: "Number",
-    //     description: "string mas largo"},
-    //     {poster: URL,
-    //       titulo: "string",
-    //       año: "Number",
-    //       description: "string mas largo"},
-    //     {poster: URL,
-    //         titulo: "string",
-    //         año: "Number",
-    //         description: "string mas largo"},
-    //         {poster: URL,
-    //             titulo: "string",
-    //             año: "Number",
-    //             description: "string mas largo"},
-    //             {poster: URL,
-    //                 titulo: "string",
-    //                 año: "Number",
-    //                 description: "string mas largo"},
-    //                 {poster: URL,
-    //                     titulo: "string",
-    //                     año: "Number",
-    //                     description: "string mas largo"},
-    //   ]
 
+//Executes the function with the API call on movie context
       useEffect(()=>{
-        axios.get("http://localhost:8080/movies/popular")
-        .then(response=>{
-          console.log("response", response)
-          setMoviesArray(response.data.data)
-        })
+        popularMoviesFunction()
       }, [])
+
 
   return (
     <>
     <Container className="d-flex flex-row flex-wrap mt-2 container-md justify-content-around">
 
-    {moviesArray.map((movie, i)=>{
+    {moviesArray && moviesArray.map((movie, i)=>{
         return <EachCard key={i} poster={movie.image} title={movie.title} date={movie.date} description={movie.description} />
     })}
+    {(moviesArray.length == 0) && <p className="text-white">Sorry! We couldn't find any movies named "{searchMovie}"</p>}
 
     </Container>
     </>

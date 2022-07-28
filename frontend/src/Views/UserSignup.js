@@ -1,14 +1,15 @@
 import React, {useReducer, useEffect} from 'react'
 import Signup from '../Components/SignUp'
-import FormLayout from '../Components/FormsLayout'
+import FormLayout from '../layout/FormsLayout'
 import {useUserContext} from '../context/UserContext'
 
+//Children of AllRoutes
 function UserSignup() {
   const {signup, ACTIONS, reducer, initialState} = useUserContext()
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  console.log('state en usersignup', state)
-  
+
+  //Calls formReducer to send payload through state to FormsLayout
   useEffect(() => {
     dispatch({type: ACTIONS.SIGNUP, 
               payload: {
