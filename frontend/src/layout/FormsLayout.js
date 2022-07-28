@@ -75,14 +75,14 @@ function FormLayout({ children, state }) {
                 passwordRef.current.value
             );
 				navigate('/update-profile');
-                console.log("the user logged in is" + currentUser)
-        }catch(error){
-            console.error(error)
-        }
-    }
+			}catch(error){
+				console.error(error)
+			}
+		}
 		setLoading(false);
 	}
-
+	
+	console.log(`"the user logged is" + ${currentUser.name}`)
     //assets
 	const backgroundPattern = {
 		background: `url(${Pattern})`,

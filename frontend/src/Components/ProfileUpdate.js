@@ -1,10 +1,10 @@
 import React from 'react'
-import {Form} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
 
 //Children of UserProfileUpdate on Views
 function UpdateProfile() {
-    const {emailRef, passwordRef, passwordConfirmRef, currentUser, setError} = useUserContext()
+    const {emailRef, passwordRef, passwordConfirmRef, currentUser, setError, logout} = useUserContext()
 
     function handleOnChange(e){
       if (e.target.value.length < 6){
@@ -14,12 +14,17 @@ function UpdateProfile() {
           setError('')
       }
   }
-
+function handleLogout(){
+    logout()
+}
   return (
     <>
+        <Button variant='outline-light' onClick={()=>handleLogout()}>Logout</Button>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" ref={emailRef} required defaultValue={currentUser.email}/>
+                    <Form.Control type="email" ref={emailRef} required 
+                    // defaultValue={currentUser.email}
+                    />
                 </Form.Group>
                 <Form.Group id="password">
                     <Form.Label>Password</Form.Label>

@@ -18,10 +18,9 @@ export function useUserContext(){
 //Context function
 export function UserContextProvider({children}) {
     const [currentUser, setCurrentUser] = useState() //sets user info when logged in
-    const [loading, setLoading] = useState(true) //loading boolean for conditional rendering
     const [homePage, setHomePage] = useState(false) //??? boolean to show or hide searchBar - belongs somewhere else
     const [error, setError] = useState('') //error to show on forms
-
+    const [isUserLogged, setIsUserLogged] = useState(false)
     //Forms refs 
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -45,8 +44,10 @@ export function UserContextProvider({children}) {
         await axios.post('http://localhost:8080/auth/login', {email: emailBody, password: passwordBody})
         .then( (response) => {
             if(response.status == 200){
+                console.log("something", response)
                 //stores token on session storage
                 sessionStorage.setItem("token", response.data.token)
+                setIsUserLogged(true)
             }else{
                 return console.log("ERROR!", response.data.msg)
             }
@@ -63,6 +64,7 @@ export function UserContextProvider({children}) {
     function logout(){
         setCurrentUser("")
         sessionStorage.clear()
+        setIsUserLogged(false)
         return console.log("Logout sucessfully")
     }
 
@@ -70,18 +72,20 @@ export function UserContextProvider({children}) {
     function updateUser(){
         return console.log("Update sucessfully")
     }
-
+console.log("userlogged", isUserLogged)
     //useEffect that keeps user on currentUser state decoding token
     useEffect(()=>{
-        //calls token on sessionStorage
-        const token = JSON.stringify(sessionStorage.getItem("token"))
-        //decodes token
-        const tokenDecoded = jwt_decode(token)
-        //sets user info on state
-        setCurrentUser(tokenDecoded);
-        console.log("token decoded", tokenDecoded)
-        setLoading(false)
-    }, [])
+        if(isUserLogged){
+            //calls token on sessionStorage
+            const token = JSON.stringify(sessionStorage.getItem("token"))
+            //decodes token
+            const tokenDecoded = jwt_decode(token)
+            //sets user info on state
+            setCurrentUser(tokenDecoded);
+            console.log("token decoded", tokenDecoded)
+        }
+    }, [isUserLogged])
+    console.log("current user", currentUser)
 
     //all the functions and variables that are accesibles throughout the app where userContext is used
     const value = {
@@ -105,7 +109,7 @@ export function UserContextProvider({children}) {
     //provider returned to use on AllRoutes
   return (
     <UserContext.Provider value={value}>
-        {!loading && children}
+        {children}
     </UserContext.Provider>
   )
 }
