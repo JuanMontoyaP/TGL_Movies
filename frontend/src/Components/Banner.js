@@ -1,11 +1,11 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import tgl_logo from '../assets/TGLAB_logo.svg'
 import SearchBar from './SearchBar'
 import {useUserContext} from '../context/UserContext'
 
+
 //Shown on all the views
-function Banner(props) {
-    const searchInput = useRef()
+function Banner() {
     const {homePage} = useUserContext()
     
     function handleInput() {
