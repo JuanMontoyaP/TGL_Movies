@@ -1,14 +1,14 @@
 import React, {useReducer, useEffect} from 'react'
 import ProfileUpdate from '../Components/ProfileUpdate'
-import FormLayout from '../Components/FormsLayout'
+import FormLayout from '../layout/FormsLayout'
 import {useUserContext} from '../context/UserContext'
 
+//Children of AllRoutes
 function UserProfileUpdate() {
   const {updateUser, ACTIONS, reducer, initialState} = useUserContext()
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  console.log('state en UserProfileUpdate', state)
-  
+  //Calls formReducer to send payload through state to FormsLayout
   useEffect(() => {
     dispatch({type: ACTIONS.UPDATE_PROFILE, 
               payload: {

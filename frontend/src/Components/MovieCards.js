@@ -2,35 +2,11 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Container} from 'react-bootstrap'
 import EachCard from './EachCard'
+
+//Children of Home on Views
 function MovieCards() {
 const [moviesArray, setMoviesArray] = useState([])
 
-    // const arrayDePeliculas = [
-    //     {poster: URL,
-    //     titulo: "string",
-    //     año: "Number",
-    //     description: "string mas largo"},
-    //     {poster: URL,
-    //       titulo: "string",
-    //       año: "Number",
-    //       description: "string mas largo"},
-    //     {poster: URL,
-    //         titulo: "string",
-    //         año: "Number",
-    //         description: "string mas largo"},
-    //         {poster: URL,
-    //             titulo: "string",
-    //             año: "Number",
-    //             description: "string mas largo"},
-    //             {poster: URL,
-    //                 titulo: "string",
-    //                 año: "Number",
-    //                 description: "string mas largo"},
-    //                 {poster: URL,
-    //                     titulo: "string",
-    //                     año: "Number",
-    //                     description: "string mas largo"},
-    //   ]
 
       useEffect(()=>{
         axios.get("http://localhost:8080/movies/popular")

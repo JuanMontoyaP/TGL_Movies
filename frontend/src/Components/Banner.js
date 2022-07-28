@@ -3,13 +3,12 @@ import tgl_logo from '../assets/TGLAB_logo.svg'
 import SearchBar from './SearchBar'
 import {useUserContext} from '../context/UserContext'
 
-
+//Shown on all the views
 function Banner(props) {
     const searchInput = useRef()
     const {homePage} = useUserContext()
-console.log("el homepage", homePage)
+    
     function handleInput() {
-        console.log(searchInput.current.value)
     }
   return (
 

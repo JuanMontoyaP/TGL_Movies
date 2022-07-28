@@ -2,12 +2,13 @@ import React, { useRef } from 'react'
 import {InputGroup, Form, Button} from 'react-bootstrap'
 import {FaSearchengin} from 'react-icons/fa'
 
+//Children of Banner
 function SearchBar() {
     const searchInput = useRef()
-console.log('searchInput', searchInput)
+
     function handleInput() {
-        console.log(searchInput.current.value)
     }
+
   return (
     // <>
 

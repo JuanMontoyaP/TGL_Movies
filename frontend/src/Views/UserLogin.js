@@ -1,14 +1,14 @@
-import React, {useContext, useEffect, useReducer} from 'react'
+import React, { useEffect, useReducer} from 'react'
 import Login from '../Components/Login'
 import {useUserContext} from '../context/UserContext'
-import FormLayout from '../Components/FormsLayout'
+import FormLayout from '../layout/FormsLayout'
   
+//Children of AllRoutes
   function UserLogin() {
   const {login, ACTIONS, reducer, initialState} = useUserContext()
   const [state, dispatch] = useReducer(reducer, initialState)
   
-  console.log('state en userLogin', state)
-
+  //Calls formReducer to send payload through state to FormsLayout
 useEffect(() => {
   dispatch({type: ACTIONS.SIGNUP, 
     payload: {
@@ -22,10 +22,10 @@ useEffect(() => {
     }})
   }, [])
 
+
   return (
     <div className="d-flex justify-content-center">
       <FormLayout state={state}>
-
     <Login/>
     </FormLayout>
 

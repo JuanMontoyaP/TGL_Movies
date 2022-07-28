@@ -2,6 +2,7 @@ import React from 'react'
 import { Form } from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
 
+//Children of UserSignup on views
 function Signup() {
     const {emailRef, passwordRef, passwordConfirmRef, nameRef, error, setError} = useUserContext()
 
@@ -13,7 +14,7 @@ function Signup() {
             setError('')
         }
     }
-    
+     
 
   return (
     <>

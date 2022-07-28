@@ -1,3 +1,4 @@
+//Exports actions to have access everywhere
 export const ACTIONS = {
     SIGNUP: 'signup',
     LOGIN:'login',
@@ -14,6 +15,7 @@ export const ACTIONS = {
     navigateTo: ""
 }
 
+//this function sets the data that is used on FormsLayout - not hardcoded for scalability
   export default function reducer(state, action) {
     switch (action.type) {
       case ACTIONS.SIGNUP: 

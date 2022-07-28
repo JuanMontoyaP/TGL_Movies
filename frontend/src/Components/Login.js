@@ -1,8 +1,8 @@
 import React from 'react'
-import {Form} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
 
-
+//Children of UserLogin on views
 function Login() {
 
     const { emailRef, passwordRef, setError } = useUserContext()
@@ -26,6 +26,7 @@ function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" ref={passwordRef} onChange={(e)=> handleOnChange(e)} required />
                 </Form.Group>
+                <Button> Log In with Google </Button>
     </>
   )
 }
