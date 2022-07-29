@@ -120,6 +120,7 @@ async function currentUserFromToken(){
 //GOOGLE LOG IN AND LOG OUT
         //login using google
         function googleLogin(){
+            /* global google */
             google.accounts.id.initialize({
                 client_id:
                   "793428477086-d4vqekhbr8pl8itr8scl4l55405hck1h.apps.googleusercontent.com",
@@ -146,7 +147,8 @@ async function currentUserFromToken(){
             })
               .then((resp) => resp.json())
               .then((resp) => {
-                sessionStorage.setItem("email", resp.user.email);
+                console.log("RESP EN GOOGLE", resp)
+                localStorage.setItem("token", resp.token);
               })
               .catch(console.warn);
           }

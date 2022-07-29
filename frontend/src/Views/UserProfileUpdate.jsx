@@ -3,7 +3,7 @@ import ProfileUpdate from '../Components/ProfileUpdate'
 import FormLayout from '../layout/FormsLayout'
 import {useUserContext} from '../context/UserContext'
 import {Navigate} from 'react-router-dom'
-
+import LogOutGoogle from '../Components/LogOutGoogle'
 
 //Children of AllRoutes
 function UserProfileUpdate() {
@@ -36,6 +36,7 @@ if (!isUserLogged){
       // <div className="d-flex justify-content-center">
    // {/* {isUserLogged ? */}
         <FormLayout state={state}>
+            <LogOutGoogle/>
       <ProfileUpdate/>
         </FormLayout> 
     //     {/* <Navigate to="/login"/> */}
