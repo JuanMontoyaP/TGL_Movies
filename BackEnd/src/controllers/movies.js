@@ -30,8 +30,6 @@ const getMovieDetail = async (req, res) => {
 
     const movie = await getMovieData(response.data);
 
-    console.log(response.data);
-
     successResponse(req, res, movie);
   } catch (error) {
     errorResponse(req, res, boom.notFound("Movie not found"));

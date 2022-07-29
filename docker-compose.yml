@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: 'mongo'
+    ports:
+      - 27017:27017
+    volumes:
+      - db:/data/db
+
+  backend:
+    build:
+      context: ./BackEnd/
+      dockerfile: Dockerfile
+    image: tgl-movies-back
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: tgl-movies-front
+    ports:
+      - 3000:3000
+
+volumes:
+  db:
