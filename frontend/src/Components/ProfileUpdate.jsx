@@ -29,9 +29,9 @@ function handleLogout(){
 //     }
 // }, [])
 
-useEffect(()=>{
-    currentUserFromToken()
-}, [isUserLogged]) 
+// useEffect(()=>{
+//     currentUserFromToken()
+// }, [isUserLogged]) 
 
 if (!isUserLogged){
     console.log("user logged en update", isUserLogged)
