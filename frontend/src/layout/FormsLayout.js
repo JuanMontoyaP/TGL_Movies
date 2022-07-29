@@ -28,7 +28,8 @@ function FormLayout({ children, state }) {
 		nameRef,
 		setError,
         error,
-        currentUser
+        currentUser,
+		isUserLogged
 	} = useUserContext();
 
     //state for conditional rendering
@@ -74,7 +75,7 @@ function FormLayout({ children, state }) {
                 emailRef.current.value,
                 passwordRef.current.value
             );
-				navigate('/update-profile');
+				// navigate('/update-profile');
 			}catch(error){
 				console.error(error)
 			}
@@ -82,7 +83,9 @@ function FormLayout({ children, state }) {
 		setLoading(false);
 	}
 	
-	console.log(`"the user logged is" + ${currentUser.name}`)
+	if(isUserLogged){
+		 console.log(`"the user logged is" + ${currentUser.name}`)
+	}
     //assets
 	const backgroundPattern = {
 		background: `url(${Pattern})`,

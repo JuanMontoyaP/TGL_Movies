@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
 
 //Children of UserProfileUpdate on Views
-function UpdateProfile() {
-    const {emailRef, passwordRef, passwordConfirmRef, currentUser, setError, logout} = useUserContext()
-
+function ProfileUpdate() {
+    const {emailRef, passwordRef, passwordConfirmRef, currentUser, setError, logout, setIsUserLogged, isUserLogged} = useUserContext()
+console.log("current user in profile update", currentUser)
     function handleOnChange(e){
       if (e.target.value.length < 6){
           setError('Password must be at least 6 characters')
@@ -14,16 +14,27 @@ function UpdateProfile() {
           setError('')
       }
   }
+
 function handleLogout(){
     logout()
 }
+
+useEffect(() => {
+    console.log("update profile isuerlogged outside", isUserLogged)
+    if(localStorage.getItem("user") == 'true'){
+        setIsUserLogged(true)
+        console.log("update profile isuerlogged inside", isUserLogged)
+
+    }
+}, [])
+
   return (
     <>
         <Button variant='outline-light' onClick={()=>handleLogout()}>Logout</Button>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" ref={emailRef} required 
-                    // defaultValue={currentUser.email}
+                    defaultValue={currentUser.email}
                     />
                 </Form.Group>
                 <Form.Group id="password">
@@ -34,8 +45,9 @@ function handleLogout(){
                     <Form.Label>Password Confirmation</Form.Label>
                     <Form.Control type="password" ref={passwordConfirmRef} onChange={(e)=> handleOnChange(e)}  placeholder='Leave blank to keep the same'/>
                 </Form.Group>
-    </>
+                </>
+            
   )
 }
 
-export default UpdateProfile
+export default ProfileUpdate

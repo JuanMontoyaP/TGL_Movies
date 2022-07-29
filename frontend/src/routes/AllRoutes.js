@@ -1,15 +1,18 @@
-import React from 'react'
+//Router
+import { Routes, Route } from 'react-router-dom'
+//Views
 import UserSignup from '../Views/UserSignup'
 import UserLogin from '../Views/UserLogin'
-import PrivateRoute from './PrivateRoute'
 import UserProfileUpdate from '../Views/UserProfileUpdate'
-import PageNotFound from '../Views/PageNotFound'
-import GuestRoute from './GuestRoute'
+import SavedMovies from '../Views/SavedMovies'
 import Home from '../Views/Home'
-
-import { Routes, Route } from 'react-router-dom'
+import PageNotFound from '../Views/PageNotFound'
+//Conditionals 
+import GuestRoute from './GuestRoute'
+import PrivateRoute from './PrivateRoute'
 
 function AllRoutes(){
+  
   return(
     <div 
     // className="w-100 align-self-center m-5 p-5" style={{maxWidth: '600px'}}
@@ -32,6 +35,11 @@ function AllRoutes(){
         <Route path="/update-profile" element={
           // <PrivateRoute>
             <UserProfileUpdate/>
+         // </PrivateRoute>
+        }/>
+         <Route path="/saved-movies" element={
+          // <PrivateRoute>
+            <SavedMovies/>
          // </PrivateRoute>
         }/>
     <Route path="/*" element={<PageNotFound/>}/>

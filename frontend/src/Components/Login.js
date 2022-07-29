@@ -5,7 +5,7 @@ import {useUserContext} from '../context/UserContext'
 //Children of UserLogin on views
 function Login() {
 
-    const { emailRef, passwordRef, setError } = useUserContext()
+    const { emailRef, passwordRef, setError, isUserLogged } = useUserContext()
 
     function handleOnChange(e){
       if (e.target.value.length < 6){
@@ -26,7 +26,7 @@ function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" ref={passwordRef} onChange={(e)=> handleOnChange(e)} required />
                 </Form.Group>
-                <Button> Log In with Google </Button>
+                <Button disable={isUserLogged}> Log In with Google </Button>
     </>
   )
 }

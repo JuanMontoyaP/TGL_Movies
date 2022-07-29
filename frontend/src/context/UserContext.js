@@ -14,10 +14,9 @@ const UserContext = React.createContext()
 export function useUserContext(){
     return useContext(UserContext)
 }
-
 //Context function
 export function UserContextProvider({children}) {
-    const [currentUser, setCurrentUser] = useState() //sets user info when logged in
+    const [currentUser, setCurrentUser] = useState({}) //sets user info when logged in
     const [homePage, setHomePage] = useState(false) //??? boolean to show or hide searchBar - belongs somewhere else
     const [error, setError] = useState('') //error to show on forms
     const [isUserLogged, setIsUserLogged] = useState(false)
@@ -45,8 +44,11 @@ export function UserContextProvider({children}) {
         .then( (response) => {
             if(response.status == 200){
                 console.log("something", response)
-                //stores token on session storage
-                sessionStorage.setItem("token", response.data.token)
+                //stores token on local storage
+                localStorage.setItem("token", response.data.token)
+                localStorage.setItem('user', true)
+                currentUserFromToken()
+                console.log("current user inside log in function", currentUser)
                 setIsUserLogged(true)
             }else{
                 return console.log("ERROR!", response.data.msg)
@@ -63,7 +65,8 @@ export function UserContextProvider({children}) {
         //logout function - used in UpdateProfile and Navbar
     function logout(){
         setCurrentUser("")
-        sessionStorage.clear()
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
         setIsUserLogged(false)
         return console.log("Logout sucessfully")
     }
@@ -73,17 +76,36 @@ export function UserContextProvider({children}) {
         return console.log("Update sucessfully")
     }
 console.log("userlogged", isUserLogged)
-    //useEffect that keeps user on currentUser state decoding token
+
+
+   
+//function that keeps user on currentUser state decoding token
+async function currentUserFromToken(){
+       //calls token on localStorage
+       const token = JSON.stringify(localStorage.getItem("token"))
+       //decodes token
+       if(token !== 'null') {
+        console.log("token inside condit", token)
+           try {
+            const tokenDecoded = await jwt_decode(token)
+           //sets user info on state
+           setCurrentUser(tokenDecoded);
+        //    console.log("current user inside async user context", currentUser)
+        //    setIsUserLogged(true)
+           console.log("token decoded", tokenDecoded)
+           }catch(error){
+            console.error("error!!!!", error)
+            return null
+           }
+           
+       } else {
+        console.log("inside else ", token)
+       }
+    //    console.log("tokendecoded in function", tokenDecoded)
+}
+
     useEffect(()=>{
-        if(isUserLogged){
-            //calls token on sessionStorage
-            const token = JSON.stringify(sessionStorage.getItem("token"))
-            //decodes token
-            const tokenDecoded = jwt_decode(token)
-            //sets user info on state
-            setCurrentUser(tokenDecoded);
-            console.log("token decoded", tokenDecoded)
-        }
+        currentUserFromToken()
     }, [isUserLogged])
     console.log("current user", currentUser)
 
@@ -104,6 +126,8 @@ console.log("userlogged", isUserLogged)
         initialState,
         error,
         setError,
+        setIsUserLogged,
+        isUserLogged
         
     }
     //provider returned to use on AllRoutes
