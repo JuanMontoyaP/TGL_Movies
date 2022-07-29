@@ -17,6 +17,8 @@ import { useUserContext } from '../context/UserContext';
 //Assets
 import Pattern from '../assets/dots-patern-white.svg';
 
+// import bcryptjs from 'bcryptjs';
+
 //This layout sets the standard code for the forms in the app while managing the functions -
         //state comes from formReducer, manages all the data depending on the form that is shown
 function FormLayout({ children, state }) {
@@ -28,9 +30,12 @@ function FormLayout({ children, state }) {
 		nameRef,
 		setError,
         error,
-        currentUser
+        currentUser,
+		isUserLogged
 	} = useUserContext();
 
+	//SALT to hash the password
+	// const SALT = bcryptjs.genSaltSync(10)
     //state for conditional rendering
 	const [loading, setLoading] = useState(false);
     //react router function to redirect
@@ -51,6 +56,7 @@ function FormLayout({ children, state }) {
 			return setError('Passwords do not match');
 
 		} else if (formType == 'Signup') {
+			// let encriptedPass = bcryptjs.hashSync(passwordRef.current.value, SALT);
             try {
                 setError(''); 
                 setLoading(true); //disables button to avoid more than one request
@@ -68,11 +74,12 @@ function FormLayout({ children, state }) {
     }
 
 	if (formType == 'Login') {
+		// let encriptedPass = bcryptjs.hashSync(passwordRef.current.value, SALT);
         try{
                 //gets data from the formsReducer state (not hardcoded for scalability)
             await state?.submitFunctionFromUserContext(
                 emailRef.current.value,
-                passwordRef.current.value
+                passwordRef.current.value,
             );
 				navigate('/update-profile');
 			}catch(error){
@@ -82,7 +89,7 @@ function FormLayout({ children, state }) {
 		setLoading(false);
 	}
 	
-	console.log(`"the user logged is" + ${currentUser.name}`)
+	// console.log(`"the user logged is" + ${currentUser.name}`)
     //assets
 	const backgroundPattern = {
 		background: `url(${Pattern})`,
@@ -110,7 +117,7 @@ function FormLayout({ children, state }) {
 							variant='outline-light'
 							className='w-100'
 							type='Submit'
-							disable={loading}>
+							>
 							{state?.functionality}
 						</Button>
 					</Form>

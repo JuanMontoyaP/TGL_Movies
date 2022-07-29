@@ -9,7 +9,6 @@ function Signup() {
     function handleOnChange(e){
         if (e.target.value.length < 6){
             setError('Password must be at least 6 characters')
-            console.log("pass", passwordRef.current.value)
         } else {
             setError('')
         }
