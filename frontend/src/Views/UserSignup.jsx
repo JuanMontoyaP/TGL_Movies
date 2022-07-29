@@ -11,7 +11,7 @@ function UserSignup() {
 
   //Calls formReducer to send payload through state to FormsLayout
   useEffect(() => {
-    dispatch({type: ACTIONS.SIGNUP, 
+    dispatch({type: ACTIONS.FORM_SUBMIT, 
               payload: {
                 functionality: 'Sign Up', 
                 linkNavigation: '/login', 

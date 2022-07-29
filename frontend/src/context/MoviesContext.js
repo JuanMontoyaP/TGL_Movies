@@ -6,6 +6,9 @@ import React, {
 //Axios
 import axios from 'axios';
 
+//userContext for loading
+import { useUserContext } from './UserContext';
+
 //Create context
 const MovieContext = React.createContext();
 
@@ -16,6 +19,7 @@ export function useMovieContext() {
 
 //Context function
 export function MovieContextProvider({children}) {
+	const {isLoading, setIsLoading} = useUserContext()
 
 	//Set in SearchBar component via handleInput function
 	const [searchMovie, setSearchMovie] = useState('');
@@ -28,28 +32,40 @@ export function MovieContextProvider({children}) {
 
 	//API call to show popular movies
 	async function popularMoviesFunction() {
+		try{
 		await axios
 			.get('http://localhost:8080/movies/popular')
 			.then((response) => {
 				console.log('response', response);
 				setMoviesArray(response.data.data);
+				setIsLoading(false)
 			})
 			.catch((error) => console.log(error));
+		}catch(error){
+			console.log("error!", error)
+		}
 	}
 
     //API call to get all genres names 
     async function movieGenresFunction() {
+		try{
 		await axios
 			.get('http://localhost:8080/movies/genre')
 			.then((response) => {
 				console.log('response of genre', response);
 				setMovieGenres(response.data.data);
+				setIsLoading(false)
+
 			})
 			.catch((error) => console.log(error));
+		}catch(error){
+			console.log("error!", error)
+		}
 	}
 
 	//API call to search movie
 	async function searchFunction() {
+		try{
 		await axios
 			.get(
 				`http://localhost:8080/movies?query=${searchMovie}`
@@ -61,8 +77,13 @@ export function MovieContextProvider({children}) {
                     moviesWithPoster(
                         response.data.data.results
                     );
+				setIsLoading(false)
                 }
-			});
+			})
+			.catch((error) => console.log(error));
+		}catch(error){
+			console.log("error!", error)
+		}
 	}
 	//Function to filter search results and show only movies with poster/image
 	function moviesWithPoster(searchedMovies) {
