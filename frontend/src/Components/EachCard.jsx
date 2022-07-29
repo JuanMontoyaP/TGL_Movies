@@ -51,7 +51,9 @@ function EachCard(props) {
 							{foundMovie.title}
               </Card.Title>
 						</Card.Header>
-						<Card.Text>
+						<Card.Text style={{
+					height: '240px', overflow: 'hidden'
+				}}>
 							{foundMovie.description}
 						</Card.Text>
 					</Card.ImgOverlay>

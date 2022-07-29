@@ -117,6 +117,41 @@ async function currentUserFromToken(){
     //    console.log("tokendecoded in function", tokenDecoded)
 }
 
+//GOOGLE LOG IN AND LOG OUT
+        //login using google
+        function googleLogin(){
+            google.accounts.id.initialize({
+                client_id:
+                  "793428477086-d4vqekhbr8pl8itr8scl4l55405hck1h.apps.googleusercontent.com",
+                callback: handleCredentialResponse,
+              });
+          
+              google.accounts.id.renderButton(document.getElementById("buttonDiv"), {
+                theme: "outline",
+                size: "large",
+              });
+        }
+
+        //credential response with google
+        function handleCredentialResponse(response) {
+
+            const body = { id_token: response.credential };
+        
+            fetch("http://localhost:8080/auth/google", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
+            })
+              .then((resp) => resp.json())
+              .then((resp) => {
+                sessionStorage.setItem("email", resp.user.email);
+              })
+              .catch(console.warn);
+          }
+
+    //useEffect that keeps user on currentUser state decoding token
     useEffect(()=>{
         currentUserFromToken()
     }, [isUserLogged])
@@ -144,7 +179,8 @@ async function currentUserFromToken(){
         isUserLogged,
         isLoading, 
         currentUserFromToken,
-        setIsLoading
+        setIsLoading,
+        googleLogin
         
     }
     //provider returned to use on AllRoutes
