@@ -7,7 +7,7 @@ import {Container, Row, Col} from 'react-bootstrap'
 import {useMovieContext} from '../context/MoviesContext'
 import {useUserContext} from '../context/UserContext'
 //Components
-import EachMovieSaved from '../Components/EachMovieSaved'
+import EachMovieSaved from './EachMovieSaved'
 
 function SavedMovies() {
   const {isUserLogged} = useUserContext()

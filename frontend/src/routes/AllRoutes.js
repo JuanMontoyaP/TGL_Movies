@@ -4,9 +4,10 @@ import { Routes, Route } from 'react-router-dom'
 import UserSignup from '../Views/UserSignup'
 import UserLogin from '../Views/UserLogin'
 import UserProfileUpdate from '../Views/UserProfileUpdate'
-import SavedMovies from '../Views/SavedMovies'
+import SavedMovies from '../Components/SavedMovies'
 import Home from '../Views/Home'
 import PageNotFound from '../Views/PageNotFound'
+import Profile from '../Views/Profile'
 //Conditionals 
 import GuestRoute from './GuestRoute'
 import PrivateRoute from './PrivateRoute'
@@ -50,6 +51,11 @@ if (isLoading){
          <Route path="/saved-movies" element={
           // <PrivateRoute>
             <SavedMovies/>
+         // </PrivateRoute>
+        }/>
+        <Route path="/my-profile" element={
+          // <PrivateRoute>
+            <Profile/>
          // </PrivateRoute>
         }/>
     <Route path="/*" element={<PageNotFound/>}/>

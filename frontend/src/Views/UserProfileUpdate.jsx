@@ -33,14 +33,14 @@ if (!isUserLogged){
   } else{
  
     return (
-      <div className="d-flex justify-content-center">
-    {/* {isUserLogged ? */}
+      // <div className="d-flex justify-content-center">
+   // {/* {isUserLogged ? */}
         <FormLayout state={state}>
       <ProfileUpdate/>
-        </FormLayout> :
-         {/* <Navigate to="/login"/> */}
+        </FormLayout> 
+    //     {/* <Navigate to="/login"/> */}
     // {/*}*/}
-      </div>
+   //   {/* </div> */}
     )
   }
 }
