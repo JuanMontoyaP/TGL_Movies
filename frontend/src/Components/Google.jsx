@@ -18,7 +18,7 @@ const {googleLogin} = useUserContext()
   //   })
   //     .then((resp) => resp.json())
   //     .then((resp) => {
-  //       sessionStorage.setItem("email", resp.user.email);
+  //       sessionStorage.setItem("email", resp.credential);
   //     })
   //     .catch(console.warn);
   // }

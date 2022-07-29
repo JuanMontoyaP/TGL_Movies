@@ -2,15 +2,17 @@ import React, {useReducer, useEffect} from 'react'
 import ProfileUpdate from '../Components/ProfileUpdate'
 import FormLayout from '../layout/FormsLayout'
 import {useUserContext} from '../context/UserContext'
+import {Navigate} from 'react-router-dom'
+import LogOutGoogle from '../Components/LogOutGoogle'
 
 //Children of AllRoutes
 function UserProfileUpdate() {
-  const {updateUser, ACTIONS, reducer, initialState} = useUserContext()
+  const {updateUser, ACTIONS, reducer, initialState, isUserLogged, currentUser, currentUserFromToken} = useUserContext()
   const [state, dispatch] = useReducer(reducer, initialState)
 
   //Calls formReducer to send payload through state to FormsLayout
   useEffect(() => {
-    dispatch({type: ACTIONS.UPDATE_PROFILE, 
+    dispatch({type: ACTIONS.FORM_SUBMIT, 
               payload: {
                 functionality: 'Update Your Profile', 
                 linkNavigation: '/profile', 
@@ -21,13 +23,27 @@ function UserProfileUpdate() {
                 navigateTo: 'Cancel'
               }})
   }, [])
-  return (
-    <div className="d-flex justify-content-center">
-      <FormLayout state={state}>
-    <ProfileUpdate/>
-      </FormLayout>
-    </div>
-  )
+  useEffect(()=>{
+    currentUserFromToken()
+}, [isUserLogged]) 
+
+if (!isUserLogged){
+    console.log("user logged en update", isUserLogged)
+    return <Navigate to="/login"/>
+  } else{
+ 
+    return (
+      // <div className="d-flex justify-content-center">
+   // {/* {isUserLogged ? */}
+        <FormLayout state={state}>
+            <LogOutGoogle/>
+      <ProfileUpdate/>
+        </FormLayout> 
+    //     {/* <Navigate to="/login"/> */}
+    // {/*}*/}
+   //   {/* </div> */}
+    )
+  }
 }
 
 export default UserProfileUpdate

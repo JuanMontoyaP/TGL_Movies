@@ -2,10 +2,11 @@ import React from 'react'
 
 function LogOutGoogle() {
     function handleSignOut(e) {
+       /* global google */
         console.log("is this info", google.accounts.id)
         google.accounts.id.disableAutoSelect();
         google.accounts.id.revoke(sessionStorage.getItem("email"), done => {
-          sessionStorage.clear()
+          localStorage.removeItem("token")
           window.location.reload(true)
         })
       }

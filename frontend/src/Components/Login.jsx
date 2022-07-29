@@ -6,8 +6,8 @@ import Google from './Google'
 //Children of UserLogin on views
 function Login() {
 
-    const { emailRef, passwordRef, setError } = useUserContext()
-
+    const { emailRef, passwordRef, setError, isUserLogged } = useUserContext()
+console.log("user logged en login", isUserLogged)
     function handleOnChange(e){
       if (e.target.value.length < 6){
           setError('Password must be at least 6 characters')

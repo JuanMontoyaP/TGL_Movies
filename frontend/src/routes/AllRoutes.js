@@ -1,15 +1,29 @@
-import React from 'react'
+//Router
+import { Routes, Route } from 'react-router-dom'
+//Views
 import UserSignup from '../Views/UserSignup'
 import UserLogin from '../Views/UserLogin'
-import PrivateRoute from './PrivateRoute'
 import UserProfileUpdate from '../Views/UserProfileUpdate'
-import PageNotFound from '../Views/PageNotFound'
-import GuestRoute from './GuestRoute'
+import SavedMovies from '../Components/SavedMovies'
 import Home from '../Views/Home'
+import PageNotFound from '../Views/PageNotFound'
+import Profile from '../Views/Profile'
+//Conditionals 
+import GuestRoute from './GuestRoute'
+import PrivateRoute from './PrivateRoute'
 
-import { Routes, Route } from 'react-router-dom'
+import {Spinner} from 'react-bootstrap'
+
+import {useUserContext} from '../context/UserContext'
 
 function AllRoutes(){
+const {isLoading} = useUserContext()
+
+if (isLoading){
+  return <>
+  <Spinner animation="border" variant='light' />
+  </>
+}else{
   return(
     <div 
     // className="w-100 align-self-center m-5 p-5" style={{maxWidth: '600px'}}
@@ -34,9 +48,20 @@ function AllRoutes(){
             <UserProfileUpdate/>
          // </PrivateRoute>
         }/>
+         <Route path="/saved-movies" element={
+          // <PrivateRoute>
+            <SavedMovies/>
+         // </PrivateRoute>
+        }/>
+        <Route path="/my-profile" element={
+          // <PrivateRoute>
+            <Profile/>
+         // </PrivateRoute>
+        }/>
     <Route path="/*" element={<PageNotFound/>}/>
     </Routes>
 </div>
   )
+      }
 }
 export default AllRoutes
