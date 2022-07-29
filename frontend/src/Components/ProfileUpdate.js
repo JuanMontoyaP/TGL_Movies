@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form, Button} from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
+// import LogOutGoogle from './LogOutGoogle'
 
 //Children of UserProfileUpdate on Views
 function UpdateProfile() {

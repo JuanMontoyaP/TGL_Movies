@@ -18,7 +18,8 @@ function Login() {
   }
 
   return (
-    <>
+    <> 
+    < Google />
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" ref={emailRef} required />
@@ -27,17 +28,16 @@ function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" ref={passwordRef} onChange={(e)=> handleOnChange(e)} required />
                 </Form.Group>
-                <Button className="w-100" type="Submit" disable={loading}>Log In</Button>
-            </Form>
-            < Google />
-            <div className="w-100 text-center mt-3">
+                {/* <Button className="w-100" type="Submit" disable={loading}>Log In</Button> */}
+           
+            {/* <div className="w-100 text-center mt-3">
        <Link to="/forgot-password"> Forgot password? </Link>
     </div>
-        </Card.Body>
+        <Card.Body>
     <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup"> Sign Up</Link>
     </div>    
-    </Card>
+    </Card.Body> */}
     </>
   )
 }

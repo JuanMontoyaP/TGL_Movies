@@ -82,7 +82,7 @@ function FormLayout({ children, state }) {
 		setLoading(false);
 	}
 	
-	console.log(`"the user logged is" + ${currentUser.name}`)
+	// console.log(`"the user logged is" + ${currentUser.name}`)
     //assets
 	const backgroundPattern = {
 		background: `url(${Pattern})`,
