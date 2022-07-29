@@ -20,6 +20,7 @@ export function UserContextProvider({children}) {
     const [homePage, setHomePage] = useState(false) //??? boolean to show or hide searchBar - belongs somewhere else
     const [error, setError] = useState('') //error to show on forms
     const [isUserLogged, setIsUserLogged] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     //Forms refs 
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -29,9 +30,15 @@ export function UserContextProvider({children}) {
     //CRUD Functions    
         //signup function - used in FormsLayout component
     async function signup(nameBody, emailBody, passwordBody){
-        await axios.post('http://localhost:8080/users', {name: nameBody, email: emailBody, password: passwordBody, role: 'USER_ROLE'}) //sends info tu server via POST
+
+        const registerData = {name: nameBody, 
+            email: emailBody, 
+            password: passwordBody, 
+            role: 'USER_ROLE'}
+        await axios.post('http://localhost:8080/users', registerData) //sends info tu server via POST
         .then( (response) => {
             console.log(response);
+            setIsLoading(false)
           })
           .catch( (error) => {
             console.log(error);
@@ -40,6 +47,7 @@ export function UserContextProvider({children}) {
     }
         //login function - used in FormsLayout component
     async function login(emailBody, passwordBody){
+
         await axios.post('http://localhost:8080/auth/login', {email: emailBody, password: passwordBody})
         .then( (response) => {
             if(response.status == 200){
@@ -50,6 +58,7 @@ export function UserContextProvider({children}) {
                 currentUserFromToken()
                 console.log("current user inside log in function", currentUser)
                 setIsUserLogged(true)
+                setIsLoading(false)
             }else{
                 return console.log("ERROR!", response.data.msg)
             }
@@ -68,6 +77,7 @@ export function UserContextProvider({children}) {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
         setIsUserLogged(false)
+        setIsLoading(false)
         return console.log("Logout sucessfully")
     }
 
@@ -86,10 +96,13 @@ async function currentUserFromToken(){
        //decodes token
        if(token !== 'null') {
         console.log("token inside condit", token)
+        setIsUserLogged(true)
            try {
             const tokenDecoded = await jwt_decode(token)
            //sets user info on state
            setCurrentUser(tokenDecoded);
+           setIsLoading(false)
+
         //    console.log("current user inside async user context", currentUser)
         //    setIsUserLogged(true)
            console.log("token decoded", tokenDecoded)
@@ -117,6 +130,7 @@ async function currentUserFromToken(){
         signup,
         updateUser,
         setHomePage,
+        homePage,
         emailRef,
         passwordRef,
         passwordConfirmRef,
@@ -127,7 +141,10 @@ async function currentUserFromToken(){
         error,
         setError,
         setIsUserLogged,
-        isUserLogged
+        isUserLogged,
+        isLoading, 
+        currentUserFromToken,
+        setIsLoading
         
     }
     //provider returned to use on AllRoutes

@@ -10,7 +10,7 @@ import FormLayout from '../layout/FormsLayout'
   
   //Calls formReducer to send payload through state to FormsLayout
 useEffect(() => {
-  dispatch({type: ACTIONS.SIGNUP, 
+  dispatch({type: ACTIONS.LOGIN, 
     payload: {
       functionality: 'Log In', 
       linkNavigation: '/signup', 

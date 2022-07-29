@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
+import {Navigate} from 'react-router-dom'
 
 //Children of UserProfileUpdate on Views
 function ProfileUpdate() {
-    const {emailRef, passwordRef, passwordConfirmRef, currentUser, setError, logout, setIsUserLogged, isUserLogged} = useUserContext()
+    const {emailRef, passwordRef, passwordConfirmRef, currentUser, setError, logout, setIsUserLogged, isUserLogged, currentUserFromToken} = useUserContext()
 console.log("current user in profile update", currentUser)
     function handleOnChange(e){
       if (e.target.value.length < 6){
@@ -19,14 +20,23 @@ function handleLogout(){
     logout()
 }
 
-useEffect(() => {
-    console.log("update profile isuerlogged outside", isUserLogged)
-    if(localStorage.getItem("user") == 'true'){
-        setIsUserLogged(true)
-        console.log("update profile isuerlogged inside", isUserLogged)
+// useEffect(() => {
+//     console.log("update profile isuerlogged outside", isUserLogged)
+//     if(localStorage.getItem("user") == 'true'){
+//         setIsUserLogged(true)
+//         console.log("update profile isuerlogged inside", isUserLogged)
 
-    }
-}, [])
+//     }
+// }, [])
+
+useEffect(()=>{
+    currentUserFromToken()
+}, [isUserLogged]) 
+
+if (!isUserLogged){
+    console.log("user logged en update", isUserLogged)
+    return <Navigate to="/login"/>
+  } else{
 
   return (
     <>
@@ -45,9 +55,11 @@ useEffect(() => {
                     <Form.Label>Password Confirmation</Form.Label>
                     <Form.Control type="password" ref={passwordConfirmRef} onChange={(e)=> handleOnChange(e)}  placeholder='Leave blank to keep the same'/>
                 </Form.Group>
+                
                 </>
             
   )
+  }
 }
 
 export default ProfileUpdate

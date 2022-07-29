@@ -6,7 +6,7 @@ import {useUserContext} from '../context/UserContext'
 function Login() {
 
     const { emailRef, passwordRef, setError, isUserLogged } = useUserContext()
-
+console.log("user logged en login", isUserLogged)
     function handleOnChange(e){
       if (e.target.value.length < 6){
           setError('Password must be at least 6 characters')
@@ -26,7 +26,8 @@ function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" ref={passwordRef} onChange={(e)=> handleOnChange(e)} required />
                 </Form.Group>
-                <Button disable={isUserLogged}> Log In with Google </Button>
+                
+                <Button> Log In with Google </Button>
     </>
   )
 }

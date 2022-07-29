@@ -11,8 +11,18 @@ import PageNotFound from '../Views/PageNotFound'
 import GuestRoute from './GuestRoute'
 import PrivateRoute from './PrivateRoute'
 
+import {Spinner} from 'react-bootstrap'
+
+import {useUserContext} from '../context/UserContext'
+
 function AllRoutes(){
-  
+const {isLoading} = useUserContext()
+
+if (isLoading){
+  return <>
+  <Spinner animation="border" variant='light' />
+  </>
+}else{
   return(
     <div 
     // className="w-100 align-self-center m-5 p-5" style={{maxWidth: '600px'}}
@@ -46,5 +56,6 @@ function AllRoutes(){
     </Routes>
 </div>
   )
+      }
 }
 export default AllRoutes
