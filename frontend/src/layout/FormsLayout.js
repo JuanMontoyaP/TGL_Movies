@@ -41,11 +41,12 @@ function FormLayout({ children, state }) {
 	//react router function to redirect
 	const navigate = useNavigate();
 
+	//for each form type theres a different function
+	const formType = children.type.name;
+
 	//function that manages all the submit buttons for user forms
 	async function handleSubmit(e) {
 		e.preventDefault();
-		//for each form type theres a different function
-		const formType = children.type.name;
 		//functions for signUp
 		if (
 			formType == 'Signup' &&
@@ -84,9 +85,23 @@ function FormLayout({ children, state }) {
 				console.error(error);
 			}
 		}
+		
+		if (formType == 'ProfileUpdate') {
+			// let encriptedPass = bcryptjs.hashSync(passwordRef.current.value, SALT);
+			try {
+				//gets data from the formsReducer state (not hardcoded for scalability)
+				await state?.submitFunctionFromUserContext(
+					emailRef.current.value,
+					passwordRef?.current.value
+				);
+				navigate('/');
+			} catch (error) {
+				console.error(error);
+			}
+		}
 		setLoading(false);
 	}
-
+	
 	// console.log(`"the user logged is" + ${currentUser.name}`)
 	//assets
 	const backgroundPattern = {
@@ -97,8 +112,8 @@ function FormLayout({ children, state }) {
 		<>
 			<Card
 				text={'light'}
-				border='light'
-				className='w-50 mb-5 pb-2'
+				border={formType == "ProfileUpdate"  ? ('') : ('light')} 
+				className={formType == "ProfileUpdate"  ? ('w-100 mb-3 pb-3') : ('w-50 mb-5 pb-2')}
 				style={backgroundPattern}>
 				<Card.Body>
 					<h2 className='text-center mb-4'>

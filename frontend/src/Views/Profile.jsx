@@ -7,10 +7,11 @@ import {
 } from 'react-bootstrap';
 import SideNavProfile from '../Components/SideNavProfile';
 import UserProfileUpdate from '../Views/UserProfileUpdate';
+import MyProfile from '../Components/MyProfile';
 
 function Profile() {
 	const [showComponent, setShowComponent] =
-		useState();
+		useState('');
 
 	function handleSideNavTabs(component) {
 		setShowComponent(component);
@@ -25,7 +26,19 @@ function Profile() {
 					/>
 				</Col>
 				<Col sm={10}>
-					<UserProfileUpdate />
+        {(showComponent == '') && 
+							(<MyProfile />)
+						}
+					{(showComponent == 'MyProfile') && 
+							(<MyProfile />)
+						}
+					{showComponent ==
+						'UserProfileUpdate' && (
+						<UserProfileUpdate />
+					)}
+					{showComponent == 'SavedMovies' && (
+						<SavedMovies />
+					)}
 				</Col>
 			</Row>
 		</Container>

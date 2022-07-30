@@ -120,14 +120,30 @@ export function UserContextProvider({
 		localStorage.removeItem('user');
 		setIsUserLogged(false);
 		setIsLoading(false);
+		window.location = '/';
 		return console.log('Logout sucessfully');
 	}
 
 	//update function - used in UpdateProfile
-	function updateUser() {
-		return console.log('Update sucessfully');
+	async function updateUser(...data) {
+			console.log("DATA UPDATE", data)
+			let updatedUser = {
+				email: data[0],
+				password: data[1]
+			}
+		await axios
+			.put(
+				`http://localhost:8080/users/${currentUser.uid}`,
+				updatedUser
+			) //sends info tu server via PUT
+			.then((response) => {
+				console.log(response);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}
-	console.log('userlogged', isUserLogged);
 
 	//function that keeps user on currentUser state decoding token
 	async function currentUserFromToken() {

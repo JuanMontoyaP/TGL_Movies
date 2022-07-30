@@ -15,30 +15,8 @@ import EachMovieSaved from './EachMovieSaved';
 
 function SavedMovies() {
 	const { isUserLogged } = useUserContext();
+	const { savedMoviesArray  } = useMovieContext();
 
-	const savedMoviesArray = [
-		{
-			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/mi-peluqueria-en-rio-60647-poster-200x300.jpg',
-			title: 'Mi peluqueria ...',
-			avgRating: 5,
-			myRating: 4,
-			myReview: 'Lorem ipsum...',
-		},
-		{
-			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/animals-60643-poster-213x300.jpg',
-			title: 'Animals',
-			avgRating: 4,
-			myRating: 5,
-			myReview: 'Lorem ipsum...',
-		},
-		{
-			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/cinema-sabaya-60567-poster-211x300.jpg',
-			title: 'Cinema Sabaya',
-			avgRating: 3,
-			myRating: 4,
-			myReview: 'Lorem ipsum...',
-		},
-	];
 
 	if (!isUserLogged) {
 		console.log(

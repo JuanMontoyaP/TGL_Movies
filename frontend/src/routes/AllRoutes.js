@@ -56,22 +56,6 @@ function AllRoutes() {
 						}
 					/>
 					<Route
-						path='/update-profile'
-						element={
-							// <PrivateRoute>
-							<UserProfileUpdate />
-							// </PrivateRoute>
-						}
-					/>
-					<Route
-						path='/saved-movies'
-						element={
-							// <PrivateRoute>
-							<SavedMovies />
-							// </PrivateRoute>
-						}
-					/>
-					<Route
 						path='/my-profile'
 						element={
 							// <PrivateRoute>

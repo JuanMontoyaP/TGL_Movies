@@ -113,6 +113,31 @@ export function MovieContextProvider({
 		return setMoviesArray(filteredMovies);
 	}
 
+	//Movies saved array- hardcoded in the meantime for
+	const savedMoviesArray = [
+		{
+			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/mi-peluqueria-en-rio-60647-poster-200x300.jpg',
+			title: 'Mi peluqueria ...',
+			avgRating: 5,
+			myRating: 4,
+			myReview: 'Lorem ipsum...',
+		},
+		{
+			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/animals-60643-poster-213x300.jpg',
+			title: 'Animals',
+			avgRating: 4,
+			myRating: 5,
+			myReview: 'Lorem ipsum...',
+		},
+		{
+			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/cinema-sabaya-60567-poster-211x300.jpg',
+			title: 'Cinema Sabaya',
+			avgRating: 3,
+			myRating: 4,
+			myReview: 'Lorem ipsum...',
+		},
+	];
+
 	console.log('movies array', moviesArray);
 	const value = {
 		searchMovie,
@@ -124,6 +149,7 @@ export function MovieContextProvider({
 		movieGenres,
 		genreSelected,
 		setGenreSelected,
+		savedMoviesArray
 	};
 	return (
 		<MovieContext.Provider value={value}>

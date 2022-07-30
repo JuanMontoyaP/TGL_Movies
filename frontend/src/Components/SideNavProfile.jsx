@@ -3,13 +3,15 @@ import {
 	Container,
 	ListGroup,
 	Tab,
+    Nav
 } from 'react-bootstrap';
 import LogOut from './LogOut';
+
 const sideNavData = [
 	{
-		title: 'My Account',
+		title: 'My Profile',
 		icon: '',
-		component: '',
+		component: 'MyProfile',
 	},
 	{
 		title: 'Update Profile',
@@ -19,20 +21,19 @@ const sideNavData = [
 	{
 		title: 'My Saved Movies',
 		icon: '',
-		component: '',
+		component: 'SavedMovies',
 	},
 ];
 
 function SideNavProfile(props) {
 	return (
 		// <Container className="text-white" style={{border: '1px solid red', width: '20vw'}}>
-		<Tab.Container>
-			<ListGroup>
+			<ListGroup className="pt-1">
 				{sideNavData.map((val, i) => {
 					return (
 						<ListGroup.Item
 							action
-							variant='dark'
+							variant='secondary'
 							key={i}
 							value={val.title}
 							onClick={() => {
@@ -46,7 +47,7 @@ function SideNavProfile(props) {
 				})}
 				<LogOut />
 			</ListGroup>
-		</Tab.Container>
+
 		//{/* </Container> */}
 	);
 }
