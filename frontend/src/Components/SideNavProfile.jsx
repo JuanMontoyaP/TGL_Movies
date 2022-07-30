@@ -1,55 +1,36 @@
-import React from 'react';
-import {
-	Container,
-	ListGroup,
-	Tab,
-    Nav
-} from 'react-bootstrap';
-import LogOut from './LogOut';
+import React from 'react'
+import {Container, ListGroup, Tab} from 'react-bootstrap'
 
 const sideNavData = [
-	{
-		title: 'My Profile',
-		icon: '',
-		component: 'MyProfile',
-	},
-	{
-		title: 'Update Profile',
-		icon: '',
-		component: 'UserProfileUpdate',
-	},
-	{
-		title: 'My Saved Movies',
-		icon: '',
-		component: 'SavedMovies',
-	},
-];
+    {
+        title: 'My Account',
+        icon: '',
+        component: ''
+    },
+    {
+        title: 'Update Profile',
+        icon: '',
+        component: 'UserProfileUpdate'
+    },
+    {
+        title: 'My Saved Movies',
+        icon: '',
+        component: ''
+    },
+]
 
 function SideNavProfile(props) {
-	return (
-		// <Container className="text-white" style={{border: '1px solid red', width: '20vw'}}>
-			<ListGroup className="pt-1">
-				{sideNavData.map((val, i) => {
-					return (
-						<ListGroup.Item
-							action
-							variant='secondary'
-							key={i}
-							value={val.title}
-							onClick={() => {
-								props.handleSideNavTabs(
-									val.component
-								);
-							}}>
-							{val.title}
-						</ListGroup.Item>
-					);
-				})}
-				<LogOut />
-			</ListGroup>
-
-		//{/* </Container> */}
-	);
+  return (
+    // <Container className="text-white" style={{border: '1px solid red', width: '20vw'}}>
+    <Tab.Container >
+        <ListGroup>
+            {sideNavData.map((val, i)=>{
+                return <ListGroup.Item action variant='dark' key={i} value={val.title} onClick={() =>{props.handleSideNavTabs(val.component)}}>{val.title}</ListGroup.Item>
+            })}
+        </ListGroup>
+        </Tab.Container>
+    //{/* </Container> */}
+  )
 }
 
-export default SideNavProfile;
+export default SideNavProfile

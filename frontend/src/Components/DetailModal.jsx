@@ -6,15 +6,10 @@ import {
 } from 'react-bootstrap';
 import { useMovieContext } from '../context/MoviesContext';
 
-export default function MovieModal({
-	showModal,
-	movieId,
-}) {
-	const { moviesArray } = useMovieContext();
+export default function MovieModal({showModal, movieId}) {
+	const {moviesArray} = useMovieContext();
 
-	const foundMovie = moviesArray.find(
-		(movie) => movie.id == movieId
-	);
+    const foundMovie = moviesArray.find(movie => movie.id == movieId);
 
 	return (
 		<>
@@ -32,16 +27,12 @@ export default function MovieModal({
 							{foundMovie.title}
 						</Card.Title>
 						<Card.Text>
-							{foundMovie.description}
+							{foundMovie.description}	
 						</Card.Text>
 					</Card.Body>
 					<span className='d-flex justify-content-around'>
-						<Button variant='outline-danger'>
-							Save to favorites
-						</Button>
-						<Button
-							variant='dark'
-							onClick={() => showModal()}>
+						<Button variant="outline-danger">Save to favorites</Button>
+						<Button variant="dark" onClick={() => showModal()}>
 							Close
 						</Button>
 					</span>
