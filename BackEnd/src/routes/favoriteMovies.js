@@ -28,6 +28,7 @@ router.get(
 router.post(
   "/:id",
   [
+    check("movie_id", "Is empty").notEmpty(),
     check("id", "Is not a valid ID").isMongoId(),
     check("id").custom(userExistById),
     validateInputs,
