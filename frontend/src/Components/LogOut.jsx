@@ -23,7 +23,6 @@ function LogOut() {
 				localStorage.removeItem('token');
 				localStorage.removeItem('googleUser');
 				setGoogleUser(false);
-				console.log('logged out with google');
 				window.location = '/';
 			}
 		);

@@ -36,7 +36,7 @@ if (!isUserLogged){
       // <div className="d-flex justify-content-center">
    // {/* {isUserLogged ? */}
         <FormLayout state={state}>
-            <LogOutGoogle/>
+            {/* <LogOutGoogle/> */}
       <ProfileUpdate/>
         </FormLayout> 
     //     {/* <Navigate to="/login"/> */}

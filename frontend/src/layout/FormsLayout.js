@@ -33,16 +33,16 @@ function FormLayout({ children, state }) {
 		currentUser,
 		isUserLogged,
 	} = useUserContext();
-
+	
 	//SALT to hash the password
 	// const SALT = bcryptjs.genSaltSync(10)
 	//state for conditional rendering
 	const [loading, setLoading] = useState(false);
 	//react router function to redirect
 	const navigate = useNavigate();
-
+	
 	//for each form type theres a different function
-	const formType = children.type.name;
+	const formType = children?.type?.name;
 
 	//function that manages all the submit buttons for user forms
 	async function handleSubmit(e) {
@@ -101,8 +101,7 @@ function FormLayout({ children, state }) {
 		}
 		setLoading(false);
 	}
-	
-	// console.log(`"the user logged is" + ${currentUser.name}`)
+
 	//assets
 	const backgroundPattern = {
 		background: `url(${Pattern})`,

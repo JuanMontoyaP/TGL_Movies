@@ -44,7 +44,6 @@ export function MovieContextProvider({children}) {
 					'http://localhost:8080/movies/popular'
 				)
 				.then((response) => {
-					console.log('response', response);
 					setMoviesArray(response.data.data);
 					setIsLoading(false);
 				})
@@ -60,10 +59,6 @@ export function MovieContextProvider({children}) {
 			await axios
 				.get('http://localhost:8080/movies/genre')
 				.then((response) => {
-					console.log(
-						'response of genre',
-						response
-					);
 					setMovieGenres(response.data.data);
 					setIsLoading(false);
 				})
@@ -135,7 +130,6 @@ export function MovieContextProvider({children}) {
 		},
 	];
 
-	console.log('movies array', moviesArray);
 	const value = {
 		searchMovie,
 		setSearchMovie,

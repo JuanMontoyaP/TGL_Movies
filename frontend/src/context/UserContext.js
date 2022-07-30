@@ -81,7 +81,6 @@ export function UserContextProvider({
 			})
 			.then((response) => {
 				if (response.status == 200) {
-					console.log('something', response);
 					//stores token on local storage
 					localStorage.setItem(
 						'token',
@@ -162,11 +161,9 @@ export function UserContextProvider({
 					localStorage.getItem('googleUser')
 				)
 			);
-			console.log('google user', currentUser);
 		}
 		//decodes token
 		if (token !== 'null') {
-			console.log('token inside condit', token);
 			setIsUserLogged(true);
 			try {
 				const tokenDecoded = await jwt_decode(
@@ -175,9 +172,6 @@ export function UserContextProvider({
 				//sets user info on state
 				setCurrentUser(tokenDecoded);
 				setIsLoading(false);
-
-				//    console.log("current user inside async user context", currentUser)
-				//    setIsUserLogged(true)
 				console.log(
 					'token decoded',
 					tokenDecoded
@@ -186,10 +180,7 @@ export function UserContextProvider({
 				console.error('error!!!!', error);
 				return null;
 			}
-		} else {
-			console.log('inside else ', token);
-		}
-		//    console.log("tokendecoded in function", tokenDecoded)
+		} 
 	}
 
 	//GOOGLE LOG IN AND LOG OUT
