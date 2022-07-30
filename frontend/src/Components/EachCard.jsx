@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
-import {useMovieContext} from '../context/MoviesContext'
-import DetailModal from './DetailModal'
+import { useMovieContext } from '../context/MoviesContext';
+import DetailModal from './DetailModal';
 
 function EachCard(props) {
-	const {moviesArray} = useMovieContext()
+	const { moviesArray } = useMovieContext();
 
 	const [mouseOver, setMouseOver] =
 		useState(false);
@@ -17,7 +17,9 @@ function EachCard(props) {
 		setMovieId(movieId);
 	};
 
-	const foundMovie = moviesArray.find(movie => movie.id == props.movieId);
+	const foundMovie = moviesArray.find(
+		(movie) => movie.id == props.movieId
+	);
 
 	function handleMouseOver() {
 		setMouseOver(true);
@@ -30,10 +32,11 @@ function EachCard(props) {
 		<>
 			<Card
 				bg={'secondary'}
-        		text={'light'}
+				text={'light'}
 				className='m-2 p-2 text-wrap'
 				style={{
-					width: '15rem', overflow: 'hidden'
+					width: '15rem',
+					overflow: 'hidden',
 				}}
 				onMouseOver={handleMouseOver}
 				onMouseOut={handleMouseOut}
@@ -47,13 +50,15 @@ function EachCard(props) {
 				{mouseOver && (
 					<Card.ImgOverlay>
 						<Card.Header>
-              <Card.Title>
-							{foundMovie.title}
-              </Card.Title>
+							<Card.Title>
+								{foundMovie.title}
+							</Card.Title>
 						</Card.Header>
-						<Card.Text style={{
-					height: '240px', overflow: 'hidden'
-				}}>
+						<Card.Text
+							style={{
+								height: '240px',
+								overflow: 'hidden',
+							}}>
 							{foundMovie.description}
 						</Card.Text>
 					</Card.ImgOverlay>
