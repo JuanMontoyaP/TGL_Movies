@@ -20,7 +20,8 @@ export default function MovieModal({
 		<>
 			<Modal
 				show={showModal}
-				onHide={() => showModal()}>
+				onHide={() => showModal()}
+				>
 				<Card className='mb-3'>
 					<Card.Img
 						variant='top'

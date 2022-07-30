@@ -18,11 +18,8 @@ export function useMovieContext() {
 }
 
 //Context function
-export function MovieContextProvider({
-	children,
-}) {
-	const { isLoading, setIsLoading } =
-		useUserContext();
+export function MovieContextProvider({children}) {
+	const {isLoading, setIsLoading} = useUserContext()
 
 	//Set in SearchBar component via handleInput function
 	const [searchMovie, setSearchMovie] =
