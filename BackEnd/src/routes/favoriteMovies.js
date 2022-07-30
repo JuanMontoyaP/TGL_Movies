@@ -1,7 +1,10 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { userExistById } = require("../helpers/db-validators");
+const {
+  userExistById,
+  userFavoritesExistById,
+} = require("../helpers/db-validators");
 const { validateInputs } = require("../middlewares/validate-inputs");
 
 const {
@@ -11,7 +14,16 @@ const {
 
 const router = Router();
 
-router.get("/", getFavoriteMovies);
+router.get(
+  "/:id",
+  [
+    check("id", "Is not a valid ID").isMongoId(),
+    check("id").custom(userExistById),
+    check("id").custom(userFavoritesExistById),
+    validateInputs,
+  ],
+  getFavoriteMovies
+);
 
 router.post(
   "/:id",

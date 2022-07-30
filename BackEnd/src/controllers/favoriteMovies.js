@@ -1,18 +1,26 @@
 const { successResponse, errorResponse } = require("../utils/responses");
 
-const { addMovieToUser } = require("../services/favoriteMovies");
-
-const FavoriteMovies = require("../models/favoriteMovies");
+const {
+  addMovieToUser,
+  getFavoriteMoviesDetail,
+} = require("../services/favoriteMovies");
 
 const getFavoriteMovies = async (req, res) => {
-  const movies = await Promise.resolve(FavoriteMovies.find({}));
+  const userId = req.params.id;
 
-  res.json(movies);
+  try {
+    const movies = await getFavoriteMoviesDetail(userId);
+    successResponse(req, res, movies);
+  } catch (error) {
+    errorResponse(req, res, error);
+  }
 };
 
 const addFavoriteMovies = async (req, res) => {
   const userId = req.params.id;
   const movieId = req.query.movie_id;
+
+  // fixme: null values
 
   try {
     const listFavorites = await addMovieToUser(userId, movieId);
