@@ -1,16 +1,9 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './Views/Home'
-import ThemeProvider from 'react-bootstrap/ThemeProvider'
-
+import Index from './layout/index'
 function App(){
   return (
-//     <ThemeProvider
-//   breakpoints={['xl', 'lg', 'md', 'sm']}
-//   minBreakpoint="sm"
-// >
-      <Home/>
-    // </ThemeProvider>
+  <Index/>
   );
 }
 
