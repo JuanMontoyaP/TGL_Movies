@@ -3,6 +3,7 @@ const { successResponse, errorResponse } = require("../utils/responses");
 const {
   addMovieToUser,
   getFavoriteMoviesDetail,
+  deleteMovieToUser,
 } = require("../services/favoriteMovies");
 
 const getFavoriteMovies = async (req, res) => {
@@ -16,11 +17,9 @@ const getFavoriteMovies = async (req, res) => {
   }
 };
 
-const addFavoriteMovies = async (req, res) => {
+const addFavoriteMovie = async (req, res) => {
   const userId = req.params.id;
   const movieId = req.query.movie_id;
-
-  // fixme: null values
 
   try {
     const listFavorites = await addMovieToUser(userId, movieId);
@@ -30,4 +29,16 @@ const addFavoriteMovies = async (req, res) => {
   }
 };
 
-module.exports = { getFavoriteMovies, addFavoriteMovies };
+const deleteFavoriteMovie = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const movieId = parseInt(req.query.movie_id);
+
+    const deletedMovie = await deleteMovieToUser(userId, movieId);
+    successResponse(req, res, deletedMovie);
+  } catch (error) {
+    errorResponse(req, res, error);
+  }
+};
+
+module.exports = { getFavoriteMovies, addFavoriteMovie, deleteFavoriteMovie };

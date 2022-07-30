@@ -9,7 +9,8 @@ const { validateInputs } = require("../middlewares/validate-inputs");
 
 const {
   getFavoriteMovies,
-  addFavoriteMovies,
+  addFavoriteMovie,
+  deleteFavoriteMovie,
 } = require("../controllers/favoriteMovies");
 
 const router = Router();
@@ -33,7 +34,18 @@ router.post(
     check("id").custom(userExistById),
     validateInputs,
   ],
-  addFavoriteMovies
+  addFavoriteMovie
+);
+
+router.delete(
+  "/:id",
+  [
+    check("movie_id", "Is empty").notEmpty(),
+    check("id", "Is not a valid ID").isMongoId(),
+    check("id").custom(userExistById),
+    validateInputs,
+  ],
+  deleteFavoriteMovie
 );
 
 module.exports = router;

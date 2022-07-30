@@ -1,7 +1,7 @@
 const boom = require("@hapi/boom");
 
 const { getApiData } = require("../helpers/api");
-const { getMovieData, listMovies } = require("./movies");
+const { listMovies } = require("./movies");
 
 const FavoriteMovies = require("../models/favoriteMovies");
 
@@ -40,7 +40,7 @@ const getFavoriteMoviesDetail = async (userId) => {
 
   const movies = [];
 
-  if (user.favoriteMovies === 0) {
+  if (!user.favoriteMovies || user.favoriteMovies.length === 0) {
     throw boom.notFound("No movies found");
   }
 
@@ -53,4 +53,20 @@ const getFavoriteMoviesDetail = async (userId) => {
   return await listMovies(movies);
 };
 
-module.exports = { addMovieToUser, getFavoriteMoviesDetail };
+const deleteMovieToUser = async (userId, movieId) => {
+  const user = await FavoriteMovies.findOne({ user_id: userId });
+
+  if (!user.favoriteMovies.includes(movieId)) {
+    throw boom.conflict("Movie does not exist in favorites");
+  }
+
+  user.favoriteMovies = user.favoriteMovies.filter((movie) => {
+    return movie !== movieId;
+  });
+
+  await user.save();
+
+  return { deletedMovieId: movieId };
+};
+
+module.exports = { addMovieToUser, getFavoriteMoviesDetail, deleteMovieToUser };
