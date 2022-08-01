@@ -105,6 +105,11 @@ export function MovieContextProvider({children}) {
 		return setMoviesArray(filteredMovies);
 	}
 
+	async function addToFavorites(movieId, userId){
+			await axios.post(`http://localhost:8080/movies/${userId}?movieId=${movieId}`, userId)
+			.then(response => console.log("response de post fav", response))
+			.catch(err=>console.log("error de fav", err))
+	}
 	//Movies saved array- hardcoded in the meantime for
 	const savedMoviesArray = [
 		{
@@ -140,7 +145,8 @@ export function MovieContextProvider({children}) {
 		movieGenres,
 		genreSelected,
 		setGenreSelected,
-		savedMoviesArray
+		savedMoviesArray,
+		addToFavorites
 	};
 	return (
 		<MovieContext.Provider value={value}>
