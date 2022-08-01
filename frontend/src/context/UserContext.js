@@ -124,11 +124,13 @@ export function UserContextProvider({
 	}
 
 	//update function - used in UpdateProfile
-	async function updateUser(...data) {
-			console.log("DATA UPDATE", data)
+	async function updateUser({email, password}) {
+			console.log("email UPDATE", email);
+			console.log("password UPDATE", password);
 			let updatedUser = {
-				email: data[0],
-				password: data[1]
+				email: email,
+				password: password,
+				role: "USER_ROLE"
 			}
 		await axios
 			.put(

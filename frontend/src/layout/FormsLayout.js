@@ -91,8 +91,8 @@ function FormLayout({ children, state }) {
 			try {
 				//gets data from the formsReducer state (not hardcoded for scalability)
 				await state?.submitFunctionFromUserContext(
-					emailRef.current.value,
-					passwordRef?.current.value
+				{	email: emailRef?.current.value,
+					password: passwordRef?.current.value}
 				);
 				navigate('/');
 			} catch (error) {
