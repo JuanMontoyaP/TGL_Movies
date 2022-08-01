@@ -106,7 +106,7 @@ export function MovieContextProvider({children}) {
 	}
 
 	async function addToFavorites(movieId, userId){
-			await axios.post(`http://localhost:8080/movies/${userId}?movieId=${movieId}`, userId)
+			await axios.post(`http://localhost:8080/movies/${userId}?movie_id=${movieId}`, userId)
 			.then(response => console.log("response de post fav", response))
 			.catch(err=>console.log("error de fav", err))
 	}
