@@ -3,7 +3,7 @@ import { useUserContext } from '../context/UserContext';
 import { Button } from 'react-bootstrap';
 
 function LogOut() {
-	const { logout, googleUser, setGoogleUser } =
+	const { logout, googleUser, setGoogleUser, logOutGoogle } =
 		useUserContext();
 
 	function handleLogout() {
@@ -11,21 +11,7 @@ function LogOut() {
 	}
 
 	function handleSignOut(e) {
-		/*global google */
-		console.log(
-			'is this info',
-			google.accounts.id
-		);
-		google.accounts.id.disableAutoSelect();
-		google.accounts.id.revoke(
-			localStorage.getItem('token'),
-			(done) => {
-				localStorage.removeItem('token');
-				localStorage.removeItem('googleUser');
-				setGoogleUser(false);
-				window.location = '/';
-			}
-		);
+		logOutGoogle()
 	}
 
 	if (!googleUser) {

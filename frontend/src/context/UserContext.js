@@ -235,6 +235,22 @@ export function UserContextProvider({
 			})
 			.catch(console.warn);
 	}
+		function logOutGoogle(){
+			/*global google */
+			console.log(
+				'is this info',
+				google.accounts.id
+			);
+			google.accounts.id.disableAutoSelect();
+			google.accounts.id.revoke(
+				localStorage.getItem('token'),
+				(done) => {
+					localStorage.removeItem('token');
+					localStorage.removeItem('googleUser');
+					setGoogleUser(false);
+					window.location = '/';
+				}
+			);}
 
 	//useEffect that keeps user on currentUser state decoding token
 	useEffect(() => {
@@ -268,6 +284,7 @@ export function UserContextProvider({
 		googleLogin,
 		setGoogleUser,
 		googleUser,
+		logOutGoogle
 	};
 	//provider returned to use on AllRoutes
 	return (
