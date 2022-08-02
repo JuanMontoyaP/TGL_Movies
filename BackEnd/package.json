@@ -5,7 +5,7 @@
   "description": "TGL movies",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index"
   },
   "author": "Best JS team",
   "license": "MIT",
