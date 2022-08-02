@@ -7,8 +7,10 @@ import {FaUserEdit} from 'react-icons/fa'
 
 //Children of UserProfileUpdate on Views
 function ProfileUpdate() {
-    const {emailRef, passwordRef, passwordConfirmRef, currentUser, setError, logout, setIsUserLogged, isUserLogged, currentUserFromToken} = useUserContext()
+    const {emailRef, passwordRef, passwordConfirmRef, nameRef, currentUser, setError, isUserLogged, googleUser} = useUserContext()
     const [editEmail, setEditEmail] = useState(false)
+    const [updateMsg, setUpdateMsg] = useState('')
+
     function handleOnChange(e){
       if (e.target.value.length < 6){
           setError('Password must be at least 6 characters')
@@ -17,8 +19,19 @@ function ProfileUpdate() {
       }
   }
 
+  function handleUpdateMsg(){ 
+    setUpdateMsg('Changes will be shown next time you log in')
+    setTimeout(()=>{setUpdateMsg('')}, 3000)
+
+  }
+
   function handleEdit (){
-    setEditEmail(current => !current)
+    if (!googleUser){
+        setEditEmail(current => !current)
+    } else {
+        setError("Google users cannot change email")
+        setTimeout(()=>{setError('')}, 3000)
+    }
     console.log("edit email", editEmail)
   }
 
@@ -28,9 +41,17 @@ if (!isUserLogged){
 
   return (
     <>
+                    <Form.Label>Name</Form.Label>
+                        <InputGroup id="name">
+                    <Form.Control type="text" ref={nameRef}
+                    defaultValue={currentUser.name}
+                    onChange={()=> handleUpdateMsg()}
+                    />
+                </InputGroup>
+                    <p>{updateMsg}</p>
                     <Form.Label>Email</Form.Label>
                 <InputGroup id="email">
-                    <Form.Control type="email" ref={emailRef} required 
+                    <Form.Control type="email" ref={emailRef}
                     defaultValue={currentUser.email}
                     disabled={!editEmail}
                     />

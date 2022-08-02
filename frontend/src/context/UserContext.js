@@ -124,10 +124,9 @@ export function UserContextProvider({
 	}
 
 	//update function - used in UpdateProfile
-	async function updateUser({email, password}) {
-			console.log("email UPDATE", email);
-			console.log("password UPDATE", password);
+	async function updateUser({email, password = "", name = ""}) {
 			let updatedUser = {
+				name: name,
 				email: email,
 				password: password,
 				role: "USER_ROLE"
