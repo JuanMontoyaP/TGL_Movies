@@ -19,7 +19,7 @@ export function useMovieContext() {
 
 //Context function
 export function MovieContextProvider({children}) {
-	const {isLoading, setIsLoading} = useUserContext()
+	const {isLoading, setIsLoading, currentUser} = useUserContext()
 
 	//Set in SearchBar component via handleInput function
 	const [searchMovie, setSearchMovie] =
@@ -35,7 +35,8 @@ export function MovieContextProvider({children}) {
 	//State used to save genre selected
 	const [genreSelected, setGenreSelected] =
 		useState('');
-
+	//State used to load favorite movies
+		const [favMoviesArray, setFavMoviesArray] = useState([])
 	//API call to show popular movies
 	async function popularMoviesFunction() {
 		try {
@@ -105,30 +106,50 @@ export function MovieContextProvider({children}) {
 		return setMoviesArray(filteredMovies);
 	}
 
-	//Movies saved array- hardcoded in the meantime for
-	const savedMoviesArray = [
-		{
-			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/mi-peluqueria-en-rio-60647-poster-200x300.jpg',
-			title: 'Mi peluqueria ...',
-			avgRating: 5,
-			myRating: 4,
-			myReview: 'Lorem ipsum...',
-		},
-		{
-			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/animals-60643-poster-213x300.jpg',
-			title: 'Animals',
-			avgRating: 4,
-			myRating: 5,
-			myReview: 'Lorem ipsum...',
-		},
-		{
-			img: 'https://ww1.cuevana3.me/wp-content/uploads/2022/07/cinema-sabaya-60567-poster-211x300.jpg',
-			title: 'Cinema Sabaya',
-			avgRating: 3,
-			myRating: 4,
-			myReview: 'Lorem ipsum...',
-		},
-	];
+	async function addToFavorites(movieId, userId){
+		try {
+			await axios.post(`http://localhost:8080/favoriteMovies/${userId}?movie_id=${movieId}`, userId)
+			.then(response => 
+				console.log("response de post fav", response)
+				)
+			.catch(err=>console.log("error de fav", err))
+
+		}catch(err){
+			console.log("error on async:", err)
+		}
+	}
+
+	async function loadFavorites(){
+		try {
+			await axios.get(`http://localhost:8080/favoriteMovies/${currentUser.uid}`)
+			.then(response => 
+				{
+					console.log("response de get fav", response);
+				setFavMoviesArray(response.data.data)
+			}
+				)
+			.catch(err=>console.log("error on get", err))
+
+		}catch(err){
+			console.log("error on async:", err)
+		}
+	}
+	console.log("FAV MOVIES ARRAY", favMoviesArray);
+	
+	async function removeFromFavorites(movieId){
+		try {
+			await axios.delete(`http://localhost:8080/favoriteMovies/${currentUser.uid}?movie_id=${movieId}`, currentUser.uid)
+			.then(response => 
+				console.log("response de delete fav", response)
+				// window.location.reload()
+				)
+			.catch(err=>console.log("error de fav", err))
+
+		}catch(err){
+			console.log("error on async:", err)
+		}
+	}
+	
 
 	const value = {
 		searchMovie,
@@ -140,7 +161,10 @@ export function MovieContextProvider({children}) {
 		movieGenres,
 		genreSelected,
 		setGenreSelected,
-		savedMoviesArray
+		addToFavorites,
+		favMoviesArray,
+		loadFavorites,
+		removeFromFavorites
 	};
 	return (
 		<MovieContext.Provider value={value}>

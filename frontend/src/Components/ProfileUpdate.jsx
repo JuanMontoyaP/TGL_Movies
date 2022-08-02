@@ -5,6 +5,7 @@ import {Navigate} from 'react-router-dom'
 import {FaUserEdit} from 'react-icons/fa'
 // import LogOutGoogle from './LogOutGoogle'
 
+
 //Children of UserProfileUpdate on Views
 function ProfileUpdate() {
     const {emailRef, passwordRef, passwordConfirmRef, nameRef, currentUser, setError, isUserLogged, googleUser} = useUserContext()
