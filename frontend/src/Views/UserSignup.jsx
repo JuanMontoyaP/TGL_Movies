@@ -2,10 +2,12 @@ import React, {useReducer, useEffect} from 'react'
 import Signup from '../Components/SignUp'
 import FormLayout from '../layout/FormsLayout'
 import {useUserContext} from '../context/UserContext'
+import {Navigate} from 'react-router-dom'
+
 
 //Children of AllRoutes
 function UserSignup() {
-  const {signup, ACTIONS, reducer, initialState} = useUserContext()
+  const {signup, ACTIONS, reducer, initialState, isUserLogged} = useUserContext()
   const [state, dispatch] = useReducer(reducer, initialState)
 
 
@@ -22,6 +24,11 @@ function UserSignup() {
                 navigateTo: 'Log In'
               }})
   }, [])
+
+  if (isUserLogged){
+    return <Navigate to="/my-profile"/>
+  } else{
+ 
   return (
     <div className="d-flex justify-content-center">
       <FormLayout state={state}>
@@ -29,6 +36,7 @@ function UserSignup() {
       </FormLayout>
     </div>
   )
+  }
 }
 
 export default UserSignup
