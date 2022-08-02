@@ -29,9 +29,7 @@ function FormLayout({ children, state }) {
 		passwordConfirmRef,
 		nameRef,
 		setError,
-		error,
-		currentUser,
-		isUserLogged,
+		error
 	} = useUserContext();
 	
 	//SALT to hash the password
@@ -80,7 +78,7 @@ function FormLayout({ children, state }) {
 					emailRef.current.value,
 					passwordRef.current.value
 				);
-				navigate('/my-profile');
+				// setTimeout(() => {navigate('/my-profile')}, 2000)
 			} catch (error) {
 				console.error(error);
 			}
@@ -91,8 +89,11 @@ function FormLayout({ children, state }) {
 			try {
 				//gets data from the formsReducer state (not hardcoded for scalability)
 				await state?.submitFunctionFromUserContext(
-					emailRef.current.value,
-					passwordRef?.current.value
+					{	
+						email: emailRef?.current.value,
+						password: passwordRef?.current.value,
+						name: nameRef.current.value
+				}
 				);
 				navigate('/');
 			} catch (error) {
