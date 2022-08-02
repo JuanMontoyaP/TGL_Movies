@@ -2,7 +2,6 @@ import React from 'react'
 import {Form} from 'react-bootstrap'
 import {useUserContext} from '../context/UserContext'
 import {Navigate} from 'react-router-dom'
-// import LogOutGoogle from './LogOutGoogle'
 
 //Children of UserProfileUpdate on Views
 function ProfileUpdate() {

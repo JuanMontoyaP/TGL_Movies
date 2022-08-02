@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SavedMovies from '../Components/SavedMovies';
 import {
 	Container,
@@ -8,15 +8,22 @@ import {
 import SideNavProfile from '../Components/SideNavProfile';
 import UserProfileUpdate from '../Views/UserProfileUpdate';
 import MyProfile from '../Components/MyProfile';
+import { useMovieContext } from '../context/MoviesContext';
+
 
 function Profile() {
 	const [showComponent, setShowComponent] =
 		useState('');
+	
+	const { loadFavorites, favMoviesArray  } = useMovieContext();
 
 	function handleSideNavTabs(component) {
 		setShowComponent(component);
 	}
-
+	useEffect(() => {
+		loadFavorites()
+	}, [])
+	
 	return (
 		<Container>
 			<Row>
