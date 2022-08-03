@@ -1,22 +1,21 @@
-const mongoose = require('mongoose');
+require("dotenv").config();
+const mongoose = require("mongoose");
 
 const dbConnection = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_CNN, {
+      //Obligatorios de mongoose
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-    try {
-        await mongoose.connect(process.env.MONGODB_CNN, {
-            //Obligatorios de mongoose
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
-
-    console.log('DB is online')
-
-    } catch (error) {
-        console.log(error)
-        throw new Error('Error when starting the database')
-    }
-}
+    console.log("DB is online");
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error when starting the database");
+  }
+};
 
 module.exports = {
-    dbConnection
-}
+  dbConnection,
+};

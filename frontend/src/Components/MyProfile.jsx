@@ -10,7 +10,7 @@ import { useMovieContext } from '../context/MoviesContext';
 
 function MyProfile() {
 const {currentUser} = useUserContext()
-const { savedMoviesArray  } = useMovieContext();
+const { savedMoviesArray, favMoviesArray  } = useMovieContext();
 
 
 	const backgroundPattern = {
@@ -27,7 +27,7 @@ const { savedMoviesArray  } = useMovieContext();
 					My Profile
 				</h2>
 				<h4>Name: {currentUser.name}</h4>
-				<h4>Movies saved: {savedMoviesArray.length} </h4>
+				<h4>Movies saved: {favMoviesArray.length} </h4>
 			</Card.Body>
 		</Card>
 	);

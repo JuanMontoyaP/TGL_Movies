@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  mongodb:
+    image: 'mongo:latest'
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: topgunlab
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - db:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017
+
+  backend:
+    build:
+      context: ./BackEnd/
+      dockerfile: Dockerfile
+    image: tgl-movies-back
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: tgl-movies-front
+    ports:
+      - 3000:3000
+
+volumes:
+  db:
