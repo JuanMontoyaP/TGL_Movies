@@ -30,8 +30,13 @@ const NavBar = () => {
           LogIn
         </Nav.Link></>)
           :
-          <div className='text-light'>
-          <NavDropdown style={{color: "white"}} title="My Profile" >
+          <div className='text-light '>
+           {/* <span>My Profile</span> */}
+           <NavDropdown className='text-light ' style={{color: "white"}} 
+          title={
+            <span className="text-light">My Profile</span>
+        }
+            >
           <NavDropdown.Item href="/my-profile">Go to My Profile</NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={() => handleLogOut()}>

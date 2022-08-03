@@ -54,6 +54,7 @@ function SavedMovies() {
 							title={oneMovie.title}
 							avgRating={oneMovie.vote_average}
 							myRating={oneMovie.myRating}
+							favArray = {favMoviesArray}
 						/>
 					);
 				})}

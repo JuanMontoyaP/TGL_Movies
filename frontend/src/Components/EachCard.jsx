@@ -37,6 +37,7 @@ function EachCard(props) {
 				style={{
 					width: '15rem',
 					overflow: 'hidden',
+					cursor: 'pointer'
 				}}
 				onMouseOver={handleMouseOver}
 				onMouseOut={handleMouseOut}

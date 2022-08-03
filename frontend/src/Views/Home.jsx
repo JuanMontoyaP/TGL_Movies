@@ -13,8 +13,11 @@ function Home() {
   // }, [])
 
   return (
-  <Container>
-    <FilterByGenre/>
+    <Container className="text-white text-center">
+    <hr />
+    <p>Coming soon...</p><FilterByGenre/>
+    <hr/>
+    <h1>Popular Movies</h1>
     <MovieCards/>
 
   </Container>
