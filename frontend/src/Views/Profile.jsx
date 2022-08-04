@@ -26,8 +26,8 @@ function Profile() {
 	
 	return (
 		<Container>
-			<Row>
-				<Col sm={2}>
+			<Row className='d-flex justify-content-center'>
+				<Col sm={6}>
 					<SideNavProfile
 						handleSideNavTabs={handleSideNavTabs}
 					/>

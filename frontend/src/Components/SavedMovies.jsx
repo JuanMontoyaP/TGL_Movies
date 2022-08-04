@@ -32,18 +32,7 @@ function SavedMovies() {
 			<Container fluid className='text-white text-center'>
 				<h1>My saved movies</h1>
 				{(favMoviesArray.length == 0) ? "Start saving your favorite movies!" : 
-				<Row className='mb-0'>
-					<Col sm={3}>Poster</Col>
-					<Col sm={3}>
-						<p>Title</p>
-					</Col>
-					<Col sm={2}>
-						<p>Average Rating</p>
-					</Col>
-					<Col sm={2}>
-						<p>My Rating</p>
-					</Col>
-				</Row>
+				""
 				}
 				{favMoviesArray.map((oneMovie, i) => {
 					return (
