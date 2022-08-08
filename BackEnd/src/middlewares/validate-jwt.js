@@ -20,7 +20,7 @@ const validateJWT = async (req, res, next) => {
 
         if(!user){
             return res.status(401).json({
-                msg: 'User does not exist ins db'
+                msg: 'User does not exist in db'
             })
         }
 

@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const dbConnection = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_CNN, {
-      //Obligatorios de mongoose
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

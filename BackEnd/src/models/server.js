@@ -10,13 +10,10 @@ class Server {
     this.authPath = "/auth";
     this.favoriteMovies = "/favoriteMovies";
 
-    //Connect to DB
     this.connectDB();
 
-    //Middlewares
     this.middlewares();
 
-    // Rutas de la app
     this.routes();
   }
 
@@ -25,13 +22,9 @@ class Server {
   }
 
   middlewares() {
-    //cors
+
     this.app.use(cors());
 
-    //CORS
-    this.app.use(cors());
-
-    //Lectura y parseo del body
     this.app.use(express.json());
   }
 
