@@ -8,6 +8,7 @@ import {
 import SideNavProfile from '../Components/SideNavProfile';
 import UserProfileUpdate from '../Views/UserProfileUpdate';
 import MyProfile from '../Components/MyProfile';
+import Logout from '../Components/LogOut'
 import { useMovieContext } from '../context/MoviesContext';
 
 
@@ -26,8 +27,8 @@ function Profile() {
 	
 	return (
 		<Container>
-			<Row>
-				<Col sm={2}>
+			<Row className='d-flex justify-content-center'>
+				<Col sm={6}>
 					<SideNavProfile
 						handleSideNavTabs={handleSideNavTabs}
 					/>
@@ -47,6 +48,7 @@ function Profile() {
 						<SavedMovies />
 					)}
 				</Col>
+			<Logout/>
 			</Row>
 		</Container>
 	);

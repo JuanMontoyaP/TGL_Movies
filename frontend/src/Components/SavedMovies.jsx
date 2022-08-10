@@ -13,6 +13,9 @@ import { useUserContext } from '../context/UserContext';
 //Components
 import EachMovieSaved from './EachMovieSaved';
 
+import Pattern from '../assets/dots-patern-white.svg';
+
+
 function SavedMovies() {
 	const { isUserLogged } = useUserContext();
 	const { savedMoviesArray, loadFavorites, favMoviesArray  } = useMovieContext();
@@ -20,6 +23,11 @@ function SavedMovies() {
 	useEffect(() => {
 		loadFavorites()
 	}, [])
+
+	const backgroundPattern = {
+		background: `url(${Pattern})`,
+		opacity: '0.8',
+	};
 
 	if (!isUserLogged) {
 		console.log(
@@ -29,21 +37,10 @@ function SavedMovies() {
 		return <Navigate to='/login' />;
 	} else {
 		return (
-			<Container fluid className='text-white text-center'>
-				<h1>My saved movies</h1>
+			<Container fluid className='text-white text-center pt-3' style={backgroundPattern}>
+				<h2>My saved movies</h2>
 				{(favMoviesArray.length == 0) ? "Start saving your favorite movies!" : 
-				<Row className='mb-0'>
-					<Col sm={3}>Poster</Col>
-					<Col sm={3}>
-						<p>Title</p>
-					</Col>
-					<Col sm={2}>
-						<p>Average Rating</p>
-					</Col>
-					<Col sm={2}>
-						<p>My Rating</p>
-					</Col>
-				</Row>
+				""
 				}
 				{favMoviesArray.map((oneMovie, i) => {
 					return (
@@ -54,6 +51,7 @@ function SavedMovies() {
 							title={oneMovie.title}
 							avgRating={oneMovie.vote_average}
 							myRating={oneMovie.myRating}
+							favArray = {favMoviesArray}
 						/>
 					);
 				})}

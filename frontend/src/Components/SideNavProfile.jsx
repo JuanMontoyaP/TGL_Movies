@@ -5,7 +5,7 @@ import {
 	Tab,
     Nav
 } from 'react-bootstrap';
-import LogOut from './LogOut';
+// import LogOut from './LogOut';
 
 const sideNavData = [
 	{
@@ -25,13 +25,34 @@ const sideNavData = [
 	},
 ];
 
+<Nav fill variant="tabs" defaultActiveKey="/home">
+<Nav.Item>
+  <Nav.Link href="/home">Active</Nav.Link>
+</Nav.Item>
+<Nav.Item>
+  <Nav.Link eventKey="link-1">Loooonger NavLink</Nav.Link>
+</Nav.Item>
+<Nav.Item>
+  <Nav.Link eventKey="link-2">Link</Nav.Link>
+</Nav.Item>
+<Nav.Item>
+  <Nav.Link eventKey="disabled" disabled>
+	Disabled
+  </Nav.Link>
+</Nav.Item>
+</Nav>
+
 function SideNavProfile(props) {
 	return (
 		// <Container className="text-white" style={{border: '1px solid red', width: '20vw'}}>
-			<ListGroup className="pt-1">
+			<Nav justify 
+			variant='tabs' 
+			className="pt-1 mb-3" >
 				{sideNavData.map((val, i) => {
 					return (
-						<ListGroup.Item
+						<Nav.Item>
+						<Nav.Link
+						style={{color: 'white'}}
 							action
 							variant='secondary'
 							key={i}
@@ -42,11 +63,12 @@ function SideNavProfile(props) {
 								);
 							}}>
 							{val.title}
-						</ListGroup.Item>
+						</Nav.Link>
+						</Nav.Item>
 					);
 				})}
-				<LogOut />
-			</ListGroup>
+				{/* <LogOut /> */}
+			</Nav>
 
 		//{/* </Container> */}
 	);

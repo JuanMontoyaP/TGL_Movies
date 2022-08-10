@@ -23,13 +23,13 @@ function EachMovieSaved(props) {
 			}
 
 	return (
-		<Container fluid className='text-white'>
+		<Container fluid className='text-white d-flex flex-column'>
 			<hr />
 			<Row>
-				<Col sm={3}>
+				<Col className='text-white d-flex flex-column' sm={3} >
 					<img
 						src={props.img}
-						style={{ maxHeight: '250px' }}
+						style={{ maxWidth:'100%' }}
 					/>
 				</Col>
 				<Col sm={3}>
@@ -42,7 +42,7 @@ function EachMovieSaved(props) {
 					<p>{props.myRating}</p>
 				</Col>
 				<Col sm={1}>
-					<button onClick={(e)=>handleRemoveFav(e)}>Remove</button>
+					<button className='mb-2' onClick={(e)=>handleRemoveFav(e)}>Remove</button>
 				</Col>
 			</Row>
 		</Container>

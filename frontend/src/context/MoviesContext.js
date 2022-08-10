@@ -143,7 +143,7 @@ export function MovieContextProvider({ children }) {
     addToFavorites,
     favMoviesArray,
     loadFavorites,
-    removeFromFavorites,
+    removeFromFavorites
   };
   return (
     <MovieContext.Provider value={value}>{children}</MovieContext.Provider>
