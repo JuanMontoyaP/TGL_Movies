@@ -9,7 +9,7 @@ import {useUserContext} from '../context/UserContext'
 
 export default function MovieModal({showModal, movieId}) {
 	const { moviesArray, addToFavorites, removeFromFavorites, favMoviesArray, loadFavorites } = useMovieContext();
-	const {currentUser} = useUserContext();
+	const {currentUser, isUserLogged} = useUserContext();
 	const [isMovieFav, setIsMovieFav] = useState(false)
 
 	const foundMovie = moviesArray.find(
@@ -62,17 +62,16 @@ useEffect(() => {
 						</Card.Text>
 					</Card.Body>
 					<span className='d-flex justify-content-around mb-3'>
-						{!isMovieFav ? <Button variant='outline-danger' 
+						{isUserLogged && (!isMovieFav ? <Button variant='outline-danger' 
 						onClick={(e)=> handleAddFavorite(e)}
 						value={movieId}>
-
 							Save to favorites
 						</Button> :
 						<Button variant='outline-warning' 
 						onClick={(e)=> handleRemoveFavorite(e)}
 						value={movieId}>
 								Remove From Favorites
-						</Button> }
+						</Button>) }
 						<Button
 							variant='dark'
 							onClick={() => showModal()}>
