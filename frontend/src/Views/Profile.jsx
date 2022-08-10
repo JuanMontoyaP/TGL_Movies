@@ -8,6 +8,7 @@ import {
 import SideNavProfile from '../Components/SideNavProfile';
 import UserProfileUpdate from '../Views/UserProfileUpdate';
 import MyProfile from '../Components/MyProfile';
+import Logout from '../Components/LogOut'
 import { useMovieContext } from '../context/MoviesContext';
 
 
@@ -47,6 +48,7 @@ function Profile() {
 						<SavedMovies />
 					)}
 				</Col>
+			<Logout/>
 			</Row>
 		</Container>
 	);
